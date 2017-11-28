@@ -38,8 +38,6 @@ import java.io.BufferedWriter
 
 import java.util.Calendar
 
-
-
 object StreamingLoop {
   
   var query: StreamingQuery = null
@@ -50,9 +48,9 @@ object StreamingLoop {
   
   var session: SparkSession = null
   
-  val data_dir: String = "/home/projeto/Downloads/SparkStreamingLoop/data/"
-  val query_dir: String = "/home/projeto/Downloads/SparkStreamingLoop/query/"
-  val provenance_dir: String = "/home/projeto/Downloads/SparkStreamingLoop/provenance/"
+  val data_dir: String = "/home/projeto/git/SparkStreamingLoop/data/"
+  val query_dir: String = "/home/projeto/git/SparkStreamingLoop/query/"
+  val provenance_dir: String = "/home/projeto/git/SparkStreamingLoop/provenance/"
   
   val path: Path = FileSystems.getDefault().getPath(query_dir)
   val dir_watcher = new DirectoryWatcher(path)
@@ -206,6 +204,7 @@ object StreamingLoop {
     val queryDF = session.sql(query_text)
     
     // Console
+    
     query = queryDF.writeStream
       .queryName(query_name + query_number)
       .outputMode("append")
@@ -213,6 +212,7 @@ object StreamingLoop {
       .start()
     
     // CSV (Provenance)
+      
 /*    query = queryDF.writeStream
       .queryName(query_name + query_number)
       .outputMode("append")
@@ -221,17 +221,13 @@ object StreamingLoop {
       .start("file://" + provenance_dir + "batches/")*/
     
     // Arquivo
+      
 //    query = queryDF.writeStream
 //      .queryName(query_name + query_number)
 //      .outputMode("append")
 //      .format("csv")
 //      .start()
-      
-    /*pre6.coalesce(1)
-      .write.format("com.databricks.spark.csv")
-      .option("header", "true")
-      .save("file:///home/projeto/Downloads/SparkStreamingLoop/mydata.csv")*/
-      
+    
     query_id = query.id
       
     query_number += 1
@@ -240,11 +236,7 @@ object StreamingLoop {
     
     query
     
-   
-    
   }
-  
-
   
 
   def main(args: Array[String]) {
@@ -255,8 +247,7 @@ object StreamingLoop {
     
     watch_thread.start()
     startSession()
-    createNewQuery("query.sql")
-    
+    createNewQuery("query.sql")    
 
   }
 }
