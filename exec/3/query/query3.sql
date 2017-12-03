@@ -1,0 +1,1 @@
+select avg(velocidade) from StreamingLoop3 where velocidade > 0
