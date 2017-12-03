@@ -39,8 +39,21 @@ import scala.util.parsing.json.JSON
 import org.apache.spark.sql.ForeachWriter
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.streaming.ProcessingTime
+import org.apache.spark.sql.catalyst.util.DropMalformedMode
 
 object StreamingLoop {
+  
+  /*
+   * Execution time
+   */
+  
+  def time[R](block: => R): R = {  
+    val t0 = System.nanoTime()
+    val result = block    // call-by-name
+    val t1 = System.nanoTime()
+    println("Elapsed time: " + ((t1 - t0)/1e9d) + "s")
+    result
+}
 
   /*
    * Filesystem vars & functions
@@ -301,34 +314,10 @@ object StreamingLoop {
     
     session.streams.addListener(queryListener)
     
-    println ("SparkSession started. \r\nAdded listener to streaming queries.")
+    println ("SparkSession started. Added listener to streaming queries.")
 
   }
-  
-  
-    def foreachWriterToFile(filePath: String, fieldNames: Array[String]) = new ForeachWriter[Row] {
-      var fileWriter: PrintWriter = null
-      
-      def open(partitionId: Long, version: Long): Boolean = {
-        val file = new File(filePath)
-        fileWriter = new PrintWriter(file.getAbsolutePath)
-        if (!file.exists) 
-          fileWriter.write(fieldNames.mkString(",") + "\r\n")
-        true
-      }
-
-      def process(record: Row) = {
-        fileWriter.append(record.mkString(",") + "\r\n")
-      }
-
-      def close(errorOrNull: Throwable): Unit = {
-        // close the connection
-        fileWriter.flush
-        fileWriter.close
-      }
-    }
-
-     
+       
   val queryListener = new StreamingQueryListener() {
     
     override def onQueryStarted(event: StreamingQueryListener.QueryStartedEvent): Unit =  {
@@ -384,24 +373,38 @@ object StreamingLoop {
         files <- Option(new File(data_prov(i) + "/batches").listFiles)
         file <- files
       } file.delete()
-            for {
-        files <- Option(new File(data_prov(i) + "/batches/_spark_metadata").listFiles)
+      new File(data_prov(i) + "/batches").delete()    
+       for {
+        files <- Option(new File(data_prov(i) + "/_spark_metadata").listFiles)
         file <- files
       } file.delete()
-    new File(data_prov(i) + "/batches_spark_metadata").delete()
-    new File(data_prov(i) + "/batches").delete()
+      new File(data_prov(i) + "/_spark_metadata").delete()
+      for {
+        files <- Option(new File(data_prov(i)).listFiles)
+        file <- files
+      } file.delete()
     }
     
     for (i <- from to steps-1) {
       
-      println("Starting step " + (i+1))
+      println("\r\nStarting step " + (i+1))
       println("IN: " + data_in(i))
       println("QUERY: " + query_file(i).getAbsolutePath)
       println("OUT: " + data_out(i))
-      val sq = createNewQuery((i+1), data_in(i), query_file(i), data_out(i))
-      streaming_queries(i) = sq
-      query_ids(i) = sq.id
-      println("Started step " + (i+1) + ". ID: " + sq.id)
+      val nq_time  = time {createNewQuery((i+1), data_in(i), query_file(i), data_out(i))}
+      
+      print("Waiting for data output... ")
+      // Wait for first batch processing
+      breakable {
+        while (true) {
+          Thread.sleep(500)
+          if (streaming_queries(i).recentProgress.length > 0) {
+          println("OK.")
+          break
+          }
+        }
+      }
+    
     }
     
     println("Workflow created. Streaming query IDs:")
@@ -414,7 +417,7 @@ object StreamingLoop {
   
   
 
-  def createNewQuery(stepNumber: Int, in: String, query_file: File, out: String, verbose: Boolean = false): StreamingQuery = {
+  def createNewQuery(stepNumber: Int, in: String, query_file: File, out: String, verbose: Boolean = false): Unit = {
 
     // Query file
 
@@ -424,69 +427,32 @@ object StreamingLoop {
     println ("OK.")
     // Data input
 
-    print("Input folder: ")
+    print("Read input folder: ")
     val data = session.readStream
       .option("maxFilesPerTrigger", 5)
-//      .option("inferSchema", true)
-//      .schema(veiculosType)
-//      .option("multiLine", true)
-//      .json("file://" + in)
+      .option("inferSchema", true)
       .option("header", true)
+      .option("mode","DROPMALFORMED")
       .csv("file://" + in)
-    println("read started.")
+    println("OK.")
+    
+    val dataWatermarked = 
+      if (stepNumber == 1)
+        data.withColumn("datahora", to_timestamp(from_unixtime(col("datahora") / 1000L)))
+      else
+        data
 
-    // Data preprocessing
-      
-//    val pre1 = data.select(explode(col("veiculos")).as("veiculo"))
-//
-//    val pre2 = pre1
-//      .withColumn("codigo", (col("veiculo.codigo")))
-//      .withColumn("datahora", to_timestamp(from_unixtime(col("veiculo.datahora") / 1000L)))
-//      .withColumn("codlinha", (col("veiculo.linha")))
-//      .withColumn("latitude", (col("veiculo.latitude")))
-//      .withColumn("longitude", (col("veiculo.longitude")))
-//      .withColumn("velocidade", (col("veiculo.velocidade")))
-//      .withColumn("sentido", (col("veiculo.sentido")))
-//      .withColumn("nome", (col("veiculo.trajeto")))
-//      .drop(col("veiculo"))
-//
-//    val pre3 = pre2
-//      .filter(!(col("nome").isNull) && !(col("codlinha").isNull))
-//      .filter((col("codlinha").like("5_____") || col("codlinha").like("__A") || col("codlinha").like("__")))
-//    val pre4 = pre3
-//      .withColumn("linha", trim(split(col("nome"), "-")(0)))
-//      .filter(col("linha").like("___") || col("linha").like("__"))
-//      .withColumn("corredor",
-//        when(col("linha").like("1%") or col("linha").like("2%"), "TransOeste").otherwise(
-//          when(col("linha").like("3%") or col("linha").like("4%"), "TransCarioca").otherwise(
-//            when(col("linha").like("5%"), "TransOlímpica").otherwise(""))))
-//    val pre5 = pre4
-//      .withColumnRenamed("nome", "trajeto")
-//      .drop(col("codlinha"))
-      
-    val pre5 = data.withColumn("datahora", to_timestamp(from_unixtime(col("datahora") / 1000L)))
-
-//    val pre6 = pre5
-//      .withWatermark("datahora", "1 minute")
-//      .dropDuplicates("codigo", "datahora")
-
-    val query_data = pre5
+    val query_data = dataWatermarked
+      .withWatermark("datahora", "10 minutes")
+      .dropDuplicates("codigo", "datahora")
 
     query_data.createOrReplaceTempView(session_name + stepNumber)
 
     // Executing query over data
 
-    print("Query over data: ")
+    print("Execute query over data: ")
     val queryDF = session.sql(query_text)
-    println("started.")
-
-    // Data output (console)
-
-//    val console_sq = queryDF.writeStream
-//      .queryName(session_name + session_number + "_S" + stepNumber + "_console")
-//      .outputMode("append")
-//      .format("console")
-//      .start()
+    println("OK.")
 
 //    // Prov output (batch files)
 //
@@ -499,8 +465,8 @@ object StreamingLoop {
       
     // Data output (file)
     
-    print("Output sink: ")
-    val output_sq = queryDF.writeStream
+    print("Start stream processing: ")
+    val output_sq = queryDF.repartition(1).writeStream
       .queryName(session_name + session_number + "_S" + stepNumber)
       .outputMode("append")
       .format("csv")
@@ -509,24 +475,19 @@ object StreamingLoop {
       .option("path", "file://" + data_out(stepNumber-1))
       .trigger(ProcessingTime("5 seconds"))
       .start()
-    println("started.")
-           
-//      val output_sq = queryDF.writeStream
-//      .queryName(session_name + session_number + "_S" + stepNumber + "_out")
-//      .outputMode("append")
-//      .foreach(foreachWriterToFile(data_out(stepNumber-1) + "/out.csv", queryDF.schema.fieldNames))
-//      .start()
-            
+    println("OK.")
+                       
     // Start new watcher thread to query dir
     print("Query folder monitoring: ")
     val dir_watcher: DirectoryWatcher = new DirectoryWatcher(query_file.getParentFile.toPath(), output_sq.id)
     val watch_thread: Thread = new Thread(dir_watcher)
     watch_thread.start()
     println("OK.")
+        
+    streaming_queries(stepNumber-1) = output_sq
+    query_ids(stepNumber-1) = output_sq.id
     
-    //output_sq.awaitTermination()
-    
-    output_sq
+    println("Query started successfully. ID: " + output_sq.id)
   }
 
   /*
