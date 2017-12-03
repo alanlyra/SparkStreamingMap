@@ -2,12 +2,12 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.PrintWriter
-import java.nio.file.FileSystems
 import java.nio.file.Path
 import java.nio.file.StandardWatchEventKinds.ENTRY_CREATE
 import java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY
 import java.nio.file.StandardWatchEventKinds.OVERFLOW
 import java.nio.file.WatchEvent
+import java.nio.file.WatchKey
 import java.util.Calendar
 import java.util.UUID
 
@@ -15,31 +15,18 @@ import scala.collection.JavaConverters.asScalaBufferConverter
 import scala.io.Source
 import scala.util.control.Breaks.break
 import scala.util.control.Breaks.breakable
+import scala.util.parsing.json.JSON
 
 import org.apache.log4j.Level
 import org.apache.log4j.LogManager
 import org.apache.log4j.Logger
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.col
-import org.apache.spark.sql.functions.explode
 import org.apache.spark.sql.functions.from_unixtime
-import org.apache.spark.sql.functions.split
 import org.apache.spark.sql.functions.to_timestamp
-import org.apache.spark.sql.functions.trim
-import org.apache.spark.sql.functions.when
-import org.apache.spark.sql.streaming.StreamingQuery
-import org.apache.spark.sql.types.ArrayType
-import org.apache.spark.sql.types.DoubleType
-import org.apache.spark.sql.types.StringType
-import org.apache.spark.sql.types.StructField
-import org.apache.spark.sql.types.StructType
-import java.nio.file.WatchKey
-import org.apache.spark.sql.streaming.StreamingQueryListener
-import scala.util.parsing.json.JSON
-import org.apache.spark.sql.ForeachWriter
-import org.apache.spark.sql.Row
 import org.apache.spark.sql.streaming.ProcessingTime
-import org.apache.spark.sql.catalyst.util.DropMalformedMode
+import org.apache.spark.sql.streaming.StreamingQuery
+import org.apache.spark.sql.streaming.StreamingQueryListener
 
 object StreamingLoop {
   
@@ -79,6 +66,10 @@ object StreamingLoop {
     if (f == None)
       return Array.empty[File]
     f.get
+  }
+  def deleteRecursively(file: File): Unit = {
+    if (file.isDirectory)
+      file.listFiles.foreach(deleteRecursively)
   }
   def getInt(s: String): Option[Int] = {
     try {
@@ -206,7 +197,7 @@ object StreamingLoop {
    *  DirectoryWatcher: watch file changes
    */
 
-  class DirectoryWatcher(val path: Path, val query_id: UUID) extends Runnable {
+  class DirectoryWatcher(val stepNumber: Int, val path: Path, val query_id: UUID) extends Runnable {
 
     val watchService = path.getFileSystem().newWatchService()
     path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY, OVERFLOW)
@@ -218,25 +209,28 @@ object StreamingLoop {
         &&
         !(event_path.getFileName.toString().startsWith(".")) // Discard temporary files (starting with ".")
         ) {
-        
-        val stepNumber = getInt(event_path.toFile.getParentFile.getName.toString).get
+
         println("Detected human-in-the-loop: step " + stepNumber + ", query file: " + event_path.toFile.getPath)
         
-
-        val text = "\nDetected Human In The Loop in '" + event_path + 
+        val text = "\nDetected human-in-the-loop: '" + event_path + 
         "' at the moment: " + Calendar.getInstance().getTime()
         
         val write = new PrintWriter(new FileOutputStream(
-            new File(data_prov(stepNumber) + "/hil.txt"), true))
-        val file = Source.fromFile(event_path.toFile.getPath).mkString
+            new File(data_prov(stepNumber-1) + "/hil.txt"), true))
         write.write(text)
-        write.write("\r\n")
-        write.write(file)
-        write.write("\r\n")
+        if (kind.equals(ENTRY_CREATE)) {
+          val old_query = Source.fromFile(query_file(stepNumber-1)).mkString
+          write.write("\r\nOld content:")
+          write.write(old_query)
+        }
+        val new_query = Source.fromFile(query_file(stepNumber-1).getParent + "/" + event_path.toString).mkString
+        write.write("\r\nNew content:")
+        write.write(new_query)
         write.close()
         
-        createWorkflow(from=stepNumber)
-
+        query_file(stepNumber-1) = new File(query_file(stepNumber-1).getParent + "/" + event_path.toString)
+        createWorkflow(from=stepNumber-1)
+        watchService.take().cancel()
         watchService.close()
 
       }
@@ -267,26 +261,6 @@ object StreamingLoop {
       }
     }
   }
-
-//  /*
-//   * JSON schema definition
-//   * W/o schema definition: 20+ minutes lost on schema inference 
-//   */
-//
-//  val veiculoType = StructType(
-//    Array(
-//      StructField("codigo", StringType),
-//      StructField("linha", StringType),
-//      StructField("latitude", DoubleType),
-//      StructField("longitude", DoubleType),
-//      StructField("datahora", DoubleType),
-//      StructField("velocidade", DoubleType),
-//      StructField("id_migracao", DoubleType),
-//      StructField("sentido", StringType),
-//      StructField("trajeto", StringType)))
-//
-//  val veiculosType = StructType(
-//    Array(StructField("veiculos", ArrayType(veiculoType))))
 
   /*
    * Spark vars & functions
@@ -346,7 +320,7 @@ object StreamingLoop {
     // If already active, stop steps
     if (session.streams.active.length > 0){
       
-      for (i <- from to query_ids.length){
+      for (i <- from to query_ids.length-1){
         session.streams.get(query_ids(i)).stop()
         println("Stopping step " + (i+1))
       }
@@ -361,28 +335,10 @@ object StreamingLoop {
     }
     
     // Delete outs
-    for (i <- from to data_out.length-1){
-      for {
-        files <- Option(new File(data_out(i)).listFiles)
-        file <- files
-      } file.delete()
-    }
     // Delete prov & Spark files
-    for (i <- from to data_out.length-1){
-      for {
-        files <- Option(new File(data_prov(i) + "/batches").listFiles)
-        file <- files
-      } file.delete()
-      new File(data_prov(i) + "/batches").delete()    
-       for {
-        files <- Option(new File(data_prov(i) + "/_spark_metadata").listFiles)
-        file <- files
-      } file.delete()
-      new File(data_prov(i) + "/_spark_metadata").delete()
-      for {
-        files <- Option(new File(data_prov(i)).listFiles)
-        file <- files
-      } file.delete()
+    for (i <- from to data_out.length-1){ 
+      deleteRecursively(new File(data_out(i)))
+      deleteRecursively(new File(data_prov(i)))
     }
     
     for (i <- from to steps-1) {
@@ -407,11 +363,7 @@ object StreamingLoop {
     
     }
     
-    println("Workflow created. Streaming query IDs:")
-    println(query_ids)
-    val fileWriter = new PrintWriter(new File(base_dir + "pid.txt"))
-    fileWriter.write(query_ids.mkString(" \r\n"))
-    fileWriter.close
+    println("\r\nWorkflow created successfully")
   }
   
   
@@ -436,15 +388,15 @@ object StreamingLoop {
       .csv("file://" + in)
     println("OK.")
     
-    val dataWatermarked = 
+    val dataTimestamp = 
       if (stepNumber == 1)
         data.withColumn("datahora", to_timestamp(from_unixtime(col("datahora") / 1000L)))
       else
         data
 
-    val query_data = dataWatermarked
-      .withWatermark("datahora", "10 minutes")
-      .dropDuplicates("codigo", "datahora")
+    val query_data = dataTimestamp
+//      .withWatermark("datahora", "10 minutes")
+//      .dropDuplicates("codigo", "datahora")
 
     query_data.createOrReplaceTempView(session_name + stepNumber)
 
@@ -464,7 +416,7 @@ object StreamingLoop {
 //      .start("file://" + data_prov(stepNumber-1) + "/batches/")
       
     // Data output (file)
-    
+
     print("Start stream processing: ")
     val output_sq = queryDF.repartition(1).writeStream
       .queryName(session_name + session_number + "_S" + stepNumber)
@@ -479,7 +431,7 @@ object StreamingLoop {
                        
     // Start new watcher thread to query dir
     print("Query folder monitoring: ")
-    val dir_watcher: DirectoryWatcher = new DirectoryWatcher(query_file.getParentFile.toPath(), output_sq.id)
+    val dir_watcher: DirectoryWatcher = new DirectoryWatcher(stepNumber, query_file.getParentFile.toPath(), output_sq.id)
     val watch_thread: Thread = new Thread(dir_watcher)
     watch_thread.start()
     println("OK.")

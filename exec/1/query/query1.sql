@@ -1,2 +1,1 @@
-select * from StreamingLoop1 
-where linha = 42 or linha = 36
+select * from StreamingLoop1 where linha = '5704A1'  or linha = '42'
