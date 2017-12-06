@@ -46,7 +46,7 @@ object StreamingLoop {
    * Filesystem vars & functions
    */
 
-  val base_dir: String = "/home/jonny/git/SparkStreamingLoop/exec"
+  val base_dir: String = "/home/projeto/git/SparkStreamingLoop/exec"
   val data_dir: String = /*base_dir +*/ "/data"
   val query_dir: String = /*base_dir +*/ "/query"
   val prov_dir: String = /*base_dir +*/ "/prov"
@@ -201,6 +201,8 @@ object StreamingLoop {
 
     val watchService = path.getFileSystem().newWatchService()
     path.register(watchService, ENTRY_CREATE, ENTRY_MODIFY, OVERFLOW)
+    
+    val old_query = Source.fromFile(query_file(stepNumber-1)).mkString
 
     def EventDetected(event: WatchEvent[_]): Unit = {
       val kind = event.kind
@@ -210,22 +212,27 @@ object StreamingLoop {
         !(event_path.getFileName.toString().startsWith(".")) // Discard temporary files (starting with ".")
         ) {
 
-        println("Detected human-in-the-loop: step " + stepNumber + ", query file: " + event_path.toFile.getPath)
+        println("Detected human-in-the-loop: step " + stepNumber + ", query file: " + event_path.toFile.getAbsolutePath)
+                
+        val new_query = Source.fromFile(query_file(stepNumber-1).getParent + "/" + event_path.toString).mkString
+
+        val values = Calendar.getInstance().getTime().toString() + "	" + event_path + "	" + old_query + "	" + new_query + "\n"
         
-        val text = "\nDetected human-in-the-loop: '" + event_path + 
-        "' at the moment: " + Calendar.getInstance().getTime()
+        /*val text = "\nDetected human-in-the-loop: '" + event_path + 
+        "' at the moment: " + Calendar.getInstance().getTime()*/
         
         val write = new PrintWriter(new FileOutputStream(
-            new File(data_prov(stepNumber-1) + "/hil.txt"), true))
-        write.write(text)
-        if (kind.equals(ENTRY_CREATE)) {
+            new File(base_dir + "/hil.csv"), true))
+              
+        write.write(values)
+        /*if (kind.equals(ENTRY_CREATE)) {
           val old_query = Source.fromFile(query_file(stepNumber-1)).mkString
           write.write("\r\nOld content:")
           write.write(old_query)
         }
         val new_query = Source.fromFile(query_file(stepNumber-1).getParent + "/" + event_path.toString).mkString
         write.write("\r\nNew content:")
-        write.write(new_query)
+        write.write(new_query)*/
         write.close()
         
         query_file(stepNumber-1) = new File(query_file(stepNumber-1).getParent + "/" + event_path.toString)
