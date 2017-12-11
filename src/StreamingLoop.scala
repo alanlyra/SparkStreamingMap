@@ -46,11 +46,11 @@ object StreamingLoop {
    * Filesystem vars & functions
    */
 
-  val base_dir: String = "/home/projeto/git/SparkStreamingLoop/exec"
-  val data_dir: String = /*base_dir +*/ "/data"
-  val query_dir: String = /*base_dir +*/ "/query"
-  val prov_dir: String = /*base_dir +*/ "/prov"
-  val out_dir: String =  /*base_dir +*/ "/out"
+  var base_dir: String = null
+  val data_dir: String = "/data"
+  val query_dir: String = "/query"
+  val prov_dir: String = "/prov"
+  val out_dir: String =  "/out"
   
   // Arrays containing directories and query files
   var steps: Int = 0
@@ -78,7 +78,11 @@ object StreamingLoop {
       case e: Exception => null
     }
   }
+  
   def convertJSONtoCSV(): Unit = {
+    
+    // Only applies to BRT data
+    
     print("JSON to CSV conversion: ")
     
     val files = Option(new File(data_in(0)).listFiles
@@ -185,12 +189,6 @@ object StreamingLoop {
     new File(stepDirs.last.getAbsolutePath + prov_dir).mkdirs
     data_prov(i) = stepDirs.last.getAbsolutePath + prov_dir
     
-//    println()
-//    for(i <- 0 to stepDirs.length -1){
-//      println("Step: " + (i+1) + " | In: " + data_in(i) 
-//          + " | Query: " + query_file(i).getAbsolutePath + " | Out: " + data_out(i))
-//    }
-    
   }
     
   /*
@@ -217,9 +215,6 @@ object StreamingLoop {
         val new_query = Source.fromFile(query_file(stepNumber-1).getParent + "/" + event_path.toString).mkString
 
         val values = Calendar.getInstance().getTime().toString() + "	" + event_path + "	" + old_query + "	" + new_query + "\n"
-        
-        /*val text = "\nDetected human-in-the-loop: '" + event_path + 
-        "' at the moment: " + Calendar.getInstance().getTime()*/
         
         val write = new PrintWriter(new FileOutputStream(
             new File(base_dir + "/hil.csv"), true))
@@ -309,6 +304,9 @@ object StreamingLoop {
       if (stepNumber > -1) {
         //println(s"Query ${event.progress.id} (${event.progress.name}) progress")
         val stepNumber = query_ids.indexOf(event.progress.id)
+        
+        // Prov files (dataflow progress)
+        
         val progressJson = event.progress.prettyJson
         val write = new PrintWriter(new FileOutputStream(
             new File(data_prov(stepNumber) + "/queryExecution_" + event.progress.id + "_" + event.progress.batchId + ".json"), true))
@@ -361,7 +359,7 @@ object StreamingLoop {
       breakable {
         while (true) {
           Thread.sleep(500)
-          if (streaming_queries(i).recentProgress.length > 0) {
+          if (streaming_queries(i).lastProgress.numInputRows > 0) {
           println("OK.")
           break
           }
@@ -413,15 +411,6 @@ object StreamingLoop {
     val queryDF = session.sql(query_text)
     println("OK.")
 
-//    // Prov output (batch files)
-//
-//    val batch_sq = queryDF.writeStream
-//      .queryName(session_name + session_number + "_S" + stepNumber + "_batch")
-//      .outputMode("append")
-//      .format("csv")
-//      .option("checkpointLocation", "checkpoint")
-//      .start("file://" + data_prov(stepNumber-1) + "/batches/")
-      
     // Data output (file)
 
     print("Start stream processing: ")
@@ -453,14 +442,20 @@ object StreamingLoop {
    * Main function
    */
   def main(args: Array[String]) {
-    
+    if (args.length < 1) {
+      System.err.println("No dataflow directory provided. Usage: StreamingLoop <root_dataflow_dir>")
+      System.exit(1)
+    }
+
+    base_dir = args(0)
+        
     Logger.getLogger("org").setLevel(Level.OFF)
     Logger.getLogger("akka").setLevel(Level.OFF)
     LogManager.getRootLogger().setLevel(Level.OFF)
 
     checkFiles()
     
-    // Convert JSON to CSV
+    // Convert BRT JSON data to CSV
     convertJSONtoCSV()
 
     startSession()
