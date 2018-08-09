@@ -1,0 +1,1416 @@
+﻿@charset "UTF-8";
+html, body {
+  height: 100%; }
+
+body {
+  background-image: url(../images/fundoSistema.png.png); }
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+@font-face {
+  font-family: 'robotobold';
+  src: url("../fonts/roboto-bold-webfont.eot");
+  src: url("../fonts/roboto-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/roboto-bold-webfont.woff2") format("woff2"), url("../fonts/roboto-bold-webfont.woff") format("woff"), url("../fonts/roboto-bold-webfont.ttf") format("truetype"), url("../fonts/roboto-bold-webfont.svg#robotobold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'robotoregular';
+  src: url("../fonts/roboto-regular-webfont.eot");
+  src: url("../fonts/roboto-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/roboto-regular-webfont.woff2") format("woff2"), url("../fonts/roboto-regular-webfont.woff") format("woff"), url("../fonts/roboto-regular-webfont.ttf") format("truetype"), url("../fonts/roboto-regular-webfont.svg#robotoregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'robotothin';
+  src: url("../fonts/roboto-thin-webfont.eot");
+  src: url("../fonts/roboto-thin-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/roboto-thin-webfont.woff2") format("woff2"), url("../fonts/roboto-thin-webfont.woff") format("woff"), url("../fonts/roboto-thin-webfont.ttf") format("truetype"), url("../fonts/roboto-thin-webfont.svg#robotothin") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'OpenSans-Regular';
+  src: url("../fonts/OpenSans-Regular.ttf");
+  /* Modo compatível com IE 9 */
+  src: url("../fonts/OpenSans-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/OpenSans-Regular.woff2") format("woff2"), url("../fonts/OpenSans-Regular.woff") format("woff"), url("../fonts/OpenSans-Regular.ttf") format("truetype"), url("../fonts/OpenSans-Regular.svg#svgFontName") format("svg");
+  /* iOS anteriores */ }
+
+@font-face {
+  font-family: 'OpenSans-SemiBold';
+  src: url("../fonts/OpenSans-SemiBold.ttf");
+  /* Modo compatível com IE 9 */
+  src: url("../fonts/OpenSans-SemiBold.eot?#iefix") format("embedded-opentype"), url("../fonts/OpenSans-SemiBold.woff2") format("woff2"), url("../fonts/OpenSans-SemiBold.woff") format("woff"), url("../fonts/OpenSans-SemiBold.ttf") format("truetype"), url("../fonts/OpenSans-SemiBold.svg#svgFontName") format("svg");
+  /* iOS anteriores */ }
+
+@font-face {
+  font-family: 'OpenSans-Bold';
+  src: url("../fonts/OpenSans-Bold.ttf");
+  /* Modo compatível com IE 9 */
+  src: url("../fonts/OpenSans-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/OpenSans-Bold.woff2") format("woff2"), url("../fonts/OpenSans-Bold.woff") format("woff"), url("../fonts/OpenSans-Bold.ttf") format("truetype"), url("../fonts/OpenSans-Bold.svg#svgFontName") format("svg");
+  /* iOS anteriores */ }
+
+.site, .container, .container__fluxo-CRC, .main-header, .link-btn-editar, .lista-andamento,
+.lista-caso, .lista-andamento h3,
+.lista-caso h3, .lista-lembretes .item, .nome-orgao-dist-eletronica, .dados-distribuicao, .caixa-listagem {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.lista-lembretes {
+  margin: 0;
+  padding: 0;
+  display: block;
+  overflow: hidden;
+  list-style: none;
+  clear: both;
+  float: none; }
+
+.site {
+  position: relative;
+  min-height: 100%;
+  padding-bottom: 100px; }
+
+.container, .container__fluxo-CRC {
+  margin: auto;
+  position: relative;
+  max-width: 960px; }
+  .container__fluxo-CRC {
+    padding-top: 5px !important; }
+
+.container.container--erro, .container--erro.container__fluxo-CRC {
+  background-color: transparent;
+  min-height: 500px;
+  max-width: 750px;
+  border: none; }
+
+.container.container--large, .container--large.container__fluxo-CRC {
+  max-width: 1200px; }
+
+.container--large {
+  padding: 20px 0px !important; }
+
+.l-cabecalho {
+  min-height: 30px;
+  border-bottom: 4px solid #16a085;
+  width: 100%;
+  position: relative;
+  background-color: #1abc9c;
+  background-image: linear-gradient(to top, #16a085 1px, transparent 1px);
+  background-size: 10px 30px;
+  background-repeat: repeat-x;
+  margin-bottom: 14px; }
+  .l-cabecalho .logo-defensoria {
+    position: relative;
+    width: 162px;
+    height: 86px;
+    display: block;
+    background-image: url(../images/logoSistema.png);
+    background-repeat: no-repeat;
+    text-decoration: none;
+    background-position: 0px -45px; }
+  .l-cabecalho .logo-subtitulo {
+    display: block;
+    height: 20px;
+    text-transform: uppercase;
+    padding-top: 48px;
+    text-align: center;
+    font-size: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: red;
+    font-family: "robotobold"; }
+
+main .container, main .container__fluxo-CRC {
+  max-width: 960px;
+  background-color: #ffffff;
+  padding: 20px; }
+
+.main-header {
+  margin: auto;
+  position: relative;
+  max-width: 960px; }
+  .main-header .titulo-pagina,
+  .main-header .titulo-secao,
+  .main-header .titulo-subsecao {
+    margin: 0;
+    padding: 0;
+    color: #555555; }
+  .main-header .titulo-secao {
+    display: block;
+    height: 10px;
+    line-height: 10px;
+    /* border: 1px solid #111; */
+    margin-left: 2px;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-family: "robotoregular";
+    font-weight: normal;
+    font-style: normal; }
+    .main-header .titulo-secao:after {
+      content: ':'; }
+  .main-header .titulo-subsecao {
+    display: block;
+    /*height: 26px;*/
+    line-height: 26px;
+    font-size: 30px;
+    font-family: "robotobold";
+    font-weight: normal;
+    padding-bottom: 8px;
+    /* border: 1px solid #111; */ }
+
+.l-footer {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 60px;
+  background-color: #fff;
+  width: 100%;
+  border-top: 2px solid #16a085; }
+
+/* .versao-sistema{
+    position: absolute;
+    right: 20px;
+    top: 17px;
+    font-family: robotobold;
+    color: white;
+    font-size: 16px;
+    display: block;
+    border-radius: 2px;
+    background-color: #16a085;
+    padding: 0px 7px;
+    height: 23px;
+}
+ */
+.versao-sistema {
+  display: block;
+  float: right;
+  font-family: robotobold;
+  color: white;
+  font-size: 16px;
+  border-radius: 2px;
+  background-color: #16a085;
+  padding: 0px 7px;
+  height: 23px;
+  margin-top: 18px;
+  margin-right: 20px;
+  margin-left: 14px; }
+
+.logo-desfensoria {
+  display: block;
+  float: right;
+  margin-top: 6px; }
+
+/* .logo-desfensoria{
+    position: absolute;
+    right: 20px;
+    top:6px;
+}
+ */
+.msg-busca {
+  display: block;
+  background-color: #f4f2f2;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px; }
+
+.btn-icone-mais ~ .msg-busca {
+  margin-top: 40px; }
+
+.ui-messages-error-summary,
+.ui-messages-info-summary,
+.ui-messages-warn-summary,
+.ui-messages-fatal-summary {
+  font-family: "robotobold";
+  font-weight: normal;
+  font-size: 13px; }
+
+.texto-paragrafo {
+  padding-bottom: 7px !important;
+  display: block; }
+  .texto-paragrafo__modal {
+    line-height: 1.5em;
+    font-family: robotoregular;
+    font-size: 15px; }
+
+.listagem-grupo-dados {
+  margin-bottom: 40px; }
+
+.listagem-dados-pessoais {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+  .listagem-dados-pessoais li {
+    margin-bottom: 16px; }
+
+.listagem-titulo {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #34495e;
+  display: block;
+  font-family: "robotobold";
+  margin-bottom: 2px; }
+
+.listagem-dados {
+  font-size: 16px;
+  color: #7f8c8d; }
+
+h3 {
+  color: #555555;
+  padding-bottom: 3px;
+  padding-top: 0px;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: "robotobold";
+  text-transform: uppercase; }
+
+h4,
+.titulo-guia-processos {
+  font-size: 12px;
+  font-family: "robotobold";
+  color: #555555;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+  padding-bottom: 5px;
+  text-align: center; }
+
+.link-btn-editar {
+  display: inline-block;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 15px;
+  height: 30px;
+  text-decoration: none;
+  background-image: url(../images/icone-edit.png);
+  background-position: 14px; }
+
+.menu-ocorrencias {
+  display: block;
+  background-color: #f1f1f1;
+  height: 40px;
+  width: 100%; }
+
+.lista-andamento,
+.lista-caso {
+  display: block;
+  float: left;
+  font-family: "robotoregular" !important;
+  padding: 0px;
+  margin-top: 0px;
+  width: 80%; }
+  .lista-andamento .lista-andamento,
+  .lista-caso .lista-andamento {
+    width: 100%; }
+    .lista-andamento .lista-andamento .lista-itemAndamento,
+    .lista-caso .lista-andamento .lista-itemAndamento {
+      border-bottom: 1px solid #e4e4e4 !important; }
+      .lista-andamento .lista-andamento .lista-itemAndamento .and_1,
+      .lista-caso .lista-andamento .lista-itemAndamento .and_1 {
+        color: #16A385 !important; }
+      .lista-andamento .lista-andamento .lista-itemAndamento .and_2,
+      .lista-caso .lista-andamento .lista-itemAndamento .and_2 {
+        color: #969292 !important; }
+      .lista-andamento .lista-andamento .lista-itemAndamento .and_3,
+      .lista-caso .lista-andamento .lista-itemAndamento .and_3 {
+        color: #969292 !important; }
+      .lista-andamento .lista-andamento .lista-itemAndamento .and_4,
+      .lista-caso .lista-andamento .lista-itemAndamento .and_4 {
+        color: skyblue !important; }
+      .lista-andamento .lista-andamento .lista-itemAndamento a,
+      .lista-caso .lista-andamento .lista-itemAndamento a {
+        color: black !important; }
+      .lista-andamento .lista-andamento .lista-itemAndamento .lista-itemAndamento--talkbox,
+      .lista-caso .lista-andamento .lista-itemAndamento .lista-itemAndamento--talkbox {
+        border-bottom: none !important; }
+    .lista-andamento .lista-andamento .lista-itemAmdamento__ocorrencia,
+    .lista-caso .lista-andamento .lista-itemAmdamento__ocorrencia {
+      border-bottom: 2px solid #e1e1e1 !important;
+      padding: 10px 0px; }
+  .lista-andamento .lista-itemAndamento,
+  .lista-andamento .lista-itemCaso,
+  .lista-caso .lista-itemAndamento,
+  .lista-caso .lista-itemCaso {
+    display: block;
+    position: relative;
+    float: none;
+    clear: both;
+    height: auto;
+    overflow: hidden;
+    padding-right: 170px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    border-bottom: 1px solid #daefff; }
+    .lista-andamento .lista-itemAndamento--talkbox,
+    .lista-andamento .lista-itemCaso--talkbox,
+    .lista-caso .lista-itemAndamento--talkbox,
+    .lista-caso .lista-itemCaso--talkbox {
+      padding-right: 0px !important; }
+    .lista-andamento .lista-itemAndamento .lista-anexo,
+    .lista-andamento .lista-itemCaso .lista-anexo,
+    .lista-caso .lista-itemAndamento .lista-anexo,
+    .lista-caso .lista-itemCaso .lista-anexo {
+      padding: 0px !important;
+      list-style-type: square !important; }
+    .lista-andamento .lista-itemAndamento label,
+    .lista-andamento .lista-itemCaso label,
+    .lista-caso .lista-itemAndamento label,
+    .lista-caso .lista-itemCaso label {
+      width: 200px; }
+  .lista-andamento .lista-titulo,
+  .lista-caso .lista-titulo {
+    display: block;
+    font-size: 13px !important; }
+  .lista-andamento h3,
+  .lista-caso h3 {
+    display: inline-block !important;
+    margin-bottom: 0px !important;
+    border-bottom: none;
+    min-height: 24px;
+    padding-top: 2px; }
+  .lista-andamento .lista-data,
+  .lista-caso .lista-data {
+    display: inline;
+    font-family: "robotobold" !important;
+    padding-right: 10px;
+    padding-top: 5px;
+    margin-bottom: 0px !important;
+    font-weight: normal; }
+  .lista-andamento p ~ h3,
+  .lista-caso p ~ h3 {
+    font-family: "robotobold";
+    font-size: 13px; }
+  .lista-andamento p,
+  .lista-caso p {
+    margin-top: 5px !important;
+    font-size: 14px; }
+  .lista-andamento .agrupa-2-links,
+  .lista-caso .agrupa-2-links {
+    position: absolute;
+    right: 0px;
+    top: 0px; }
+  .lista-andamento a,
+  .lista-caso a {
+    text-decoration: none; }
+    .lista-andamento a:hover,
+    .lista-caso a:hover {
+      color: #7772bc; }
+  .lista-andamento .lista-anexos,
+  .lista-caso .lista-anexos {
+    padding-left: 10px;
+    list-style: none;
+    padding-bottom: 10px; }
+    .lista-andamento .lista-anexos li,
+    .lista-caso .lista-anexos li {
+      color: blueviolet; }
+    .lista-andamento .lista-anexos .item__caso-protuario,
+    .lista-caso .lista-anexos .item__caso-protuario {
+      width: 500px;
+      overflow: hidden; }
+  .lista-andamento .agrupa-links-ocorrencias, .lista-andamento .agrupa-links-ocorrencias__processosCRC,
+  .lista-caso .agrupa-links-ocorrencias,
+  .lista-caso .agrupa-links-ocorrencias__processosCRC {
+    display: block;
+    position: absolute;
+    right: 0px;
+    top: 0px; }
+    .lista-andamento .agrupa-links-ocorrencias__processosCRC,
+    .lista-caso .agrupa-links-ocorrencias__processosCRC {
+      top: 14px; }
+      .lista-andamento .agrupa-links-ocorrencias__processosCRC .link-responder,
+      .lista-caso .agrupa-links-ocorrencias__processosCRC .link-responder {
+        margin-top: 8px; }
+
+.lista-itemCaso {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important; }
+  .lista-itemCaso .lista-andamento {
+    margin-top: 5px;
+    margin-bottom: 20px; }
+  .lista-itemCaso .link-incluir-caso,
+  .lista-itemCaso .link-editar,
+  .lista-itemCaso .link-excluir {
+    margin-top: 8px !important; }
+
+.lista-itemCaso:nth-child(2n) {
+  background-color: #f3faff; }
+
+.lista-caso.lista-caso-prontuario {
+  width: 100%; }
+
+.msg-sem-atendimento-caso {
+  text-align: center;
+  display: block;
+  border-top: 1px dashed #ccc;
+  border-bottom: 1px dashed #ccc;
+  margin-top: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px; }
+
+.msg-listar-pauta {
+  margin-top: 40px; }
+
+.msg-sigilo-processo,
+.msg-sigilo-processo__justificativa {
+  display: block; }
+  .msg-sigilo-processo b,
+  .msg-sigilo-processo__justificativa b {
+    font-family: "robotobold";
+    font-weight: normal; }
+
+.msg-sigilo {
+  padding: 10px;
+  display: block;
+  margin-top: 20px;
+  border-top: 1px solid #eed3d7;
+  border-bottom: 1px solid #eed3d7;
+  background-color: #f2dede;
+  color: #b94a48;
+  text-transform: uppercase;
+  font-family: "robotobold"; }
+
+.msg-ocorrencia {
+  display: block;
+  float: left;
+  padding: 10px;
+  text-transform: uppercase;
+  font-family: "robotobold"; }
+
+.msg-ultimo-tendimento {
+  clear: both;
+  display: block;
+  margin-bottom: 10px; }
+
+.encaminhamento-urgencia {
+  background-color: #FF4A4A;
+  display: block;
+  padding: 5px;
+  border-radius: 2px;
+  color: white; }
+
+.andamento-caso-prontuario {
+  min-height: 100px;
+  padding-top: 30px; }
+  .andamento-caso-prontuario .titulo-caso-prontuario {
+    display: block !important;
+    padding-bottom: 15px;
+    font-size: 12px !important;
+    text-transform: uppercase; }
+
+.margin-top {
+  margin-top: 20px; }
+
+.atendimentoNaoValidado,
+.atendimentoValidado {
+  padding-top: 1px;
+  color: #1abc9c !important;
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  float: right; }
+
+.atendimentoValidado {
+  color: #1abc9c !important; }
+
+.atendimentoNaoValidado {
+  color: #e74c3c !important; }
+
+.header-lembrete {
+  font-size: 14px !important;
+  border-top: 1px solid #1abc9c;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  color: #0a463a;
+  display: block;
+  padding-top: 10px;
+  padding-left: 10px;
+  border-bottom: none; }
+
+.lista-lembretes {
+  margin-left: 10px; }
+  .lista-lembretes .item {
+    min-height: 30px;
+    border-bottom: 1px dotted #1abc9c;
+    padding: 4px 0px 4px 0px;
+    margin-right: 10px;
+    color: black; }
+    .lista-lembretes .item:first-child {
+      border-top: 1px dotted #1abc9c; }
+    .lista-lembretes .item a {
+      color: #148771 !important;
+      border-bottom: none !important; }
+
+.lembretes-totais-vencendo,
+.lembretes-totais-vencido {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  padding: 2px;
+  text-align: center;
+  background-color: #16a085;
+  color: white;
+  margin-right: 20px; }
+
+.label-orgao-menu {
+  width: 50px !important;
+  color: #0a463a; }
+
+.lembretes-totais-vencido {
+  background-color: orangered; }
+
+.nome-guia-recebida {
+  text-decoration: none;
+  text-align: left;
+  font-size: 16px;
+  font-weight: normal; }
+
+.container.recupera-senha, .recupera-senha.container__fluxo-CRC {
+  padding-top: 1px !important; }
+
+.list {
+  padding-left: 10px;
+  margin-top: 0px; }
+  .list-item {
+    list-style: none;
+    padding-bottom: 3px; }
+    .list-item .label-detalhes {
+      display: inline-block;
+      width: 50px;
+      text-align: right; }
+
+.dialog-botao-calendario {
+  text-indent: -10000px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: 30px;
+  color: white;
+  background: white;
+  border: none; }
+
+.icone-atencao {
+  background-image: url(../images/icone-atencao.png) !important;
+  background-repeat: no-repeat !important; }
+
+.ui-icon.ui-confirm-dialog-severity.ui-icon-alert {
+  display: none; }
+
+.text-center-content {
+  text-align: center;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  margin-top: 0px; }
+
+.campo-texto-resposta {
+  clear: both;
+  width: 500px;
+  height: 150px !important; }
+
+.nome-orgao-dist-eletronica {
+  display: block;
+  text-align: center;
+  font-family: "robotobold";
+  height: 30px;
+  padding-top: 6px;
+  text-transform: uppercase;
+  font-size: 14px !important; }
+
+.dados-distribuicao {
+  display: block;
+  text-align: center;
+  background-image: url(../images/fundo-titulo02.png);
+  padding-bottom: 6px;
+  margin-bottom: 10px; }
+  .dados-distribuicao__item {
+    display: inline-block;
+    text-align: center; }
+  .dados-distribuicao__item:nth-child(2) {
+    margin-right: 30px; }
+
+.caixa-listagem {
+  display: block;
+  width: 920px;
+  padding: 0px;
+  margin-bottom: 15px; }
+  .caixa-listagem .no-arvore {
+    text-decoration: none;
+    white-space: normal;
+    max-width: 890px;
+    display: inline-block; }
+  .caixa-listagem .ui-treenode {
+    border-bottom: 1px solid #eee;
+    padding: 5px 0px 5px 0px; }
+    .caixa-listagem .ui-treenode .ui-treenode {
+      border-bottom: none; }
+    .caixa-listagem .ui-treenode:last-child {
+      border-bottom: none; }
+  .caixa-listagem .ui-tree-toggler {
+    margin-top: 3px; }
+
+.tira-margin-l {
+  margin-left: 0px; }
+
+/* Gráfico
+----------------------------------------------------*/
+.relatorio-grafico, .relatorio-grafico-peticao {
+  padding-top: 40px !important; }
+  .relatorio-grafico .jqplot-y2axis-label, .relatorio-grafico-peticao .jqplot-y2axis-label,
+  .relatorio-grafico .jqplot-x2xis-label,
+  .relatorio-grafico-peticao .jqplot-x2xis-label {
+    text-transform: uppercase !important; }
+  .relatorio-grafico .jqplot-title, .relatorio-grafico-peticao .jqplot-title {
+    text-transform: uppercase !important; }
+  .relatorio-grafico .jqplot-xaxis-label, .relatorio-grafico-peticao .jqplot-xaxis-label {
+    text-transform: uppercase !important; }
+  .relatorio-grafico .jqplot-yaxis-label, .relatorio-grafico-peticao .jqplot-yaxis-label {
+    text-transform: uppercase !important; }
+  .relatorio-grafico .jqplot-x2axis, .relatorio-grafico-peticao .jqplot-x2axis {
+    color: blueviolet;
+    text-transform: uppercase !important; }
+
+.jqplot-series-shadowCanvas {
+  display: none !important; }
+
+/* Mansagem de ERRO
+-------------------------------------------------*/
+.ui-messages .ui-messages-error.ui-corner-all,
+.ui-messages .ui-messages-info.ui-corner-all {
+  border-radius: 0px !important;
+  border-left: 0px solid !important;
+  border-right: 0px solid !important; }
+
+.abas-primefaces .ui-tabs-outline, .abas-primefaces__itens-categoria .ui-tabs-outline {
+  outline: none !important;
+  border: none !important; }
+
+.abas-primefaces .ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active a, .abas-primefaces__itens-categoria .ui-state-default.ui-corner-top.ui-tabs-selected.ui-state-active a {
+  outline: none !important; }
+
+.abas-primefaces__itens-categoria {
+  padding: 0px; }
+  .abas-primefaces__itens-categoria .ui-tabs-panel {
+    border: 1px solid #ccc;
+    border-top: none; }
+
+.agenda-calendario h2,
+.agenda-calendario .fc-day-header.fc-widget-header {
+  font-family: "robotobold" !important;
+  font-weight: normal !important; }
+
+.lista {
+  padding: 0px;
+  margin: 0px; }
+  .lista .item-lista {
+    list-style: none;
+    padding: 0px; }
+
+.lista-modal {
+  padding: 0px; }
+  .lista-modal .item-lista-modal {
+    list-style: none;
+    text-transform: uppercase;
+    padding: 8px 0px;
+    border-bottom: 1px dashed  #ccc; }
+
+.nome-verde {
+  color: #1abc9c !important;
+  font-family: robotobold !important; }
+
+.lista-orgaos {
+  padding-left: 14px; }
+  .lista-orgaos .item-orgao {
+    list-style: square;
+    position: relative;
+    padding-right: 35px; }
+  .lista-orgaos .item-orgao-resp {
+    list-style: square;
+    margin-bottom: 5px; }
+  .lista-orgaos .link-visualizar {
+    position: absolute;
+    top: 4px;
+    right: 0px;
+    margin: 0px; }
+
+.alinha-conteudo-lista {
+  margin-top: 0px !important;
+  margin-left: 8px !important; }
+
+.lista-tabela {
+  padding-left: 14px;
+  margin: 0 0 0 10px; }
+  .lista-tabela .item-lista-tabela {
+    list-style: square;
+    position: relative;
+    padding-right: 0px;
+    margin-bottom: 5px; }
+
+.grupo-dados {
+  margin-bottom: 5px; }
+
+.titulo-celula {
+  color: #a2a2a2;
+  font-size: 12px;
+  margin-bottom: 0px;
+  border-bottom: none;
+  padding-bottom: 0px; }
+
+.lista-dados {
+  padding-left: 14px;
+  margin: 0 0 0 4px; }
+  .lista-dados .item-dados {
+    list-style: square;
+    position: relative;
+    padding-right: 35px;
+    margin-bottom: 8px; }
+  .lista-dados .link-visualizar,
+  .lista-dados .link-editar {
+    position: absolute;
+    top: 4px;
+    right: 0px;
+    margin: 0px; }
+
+.grupo-conteudo {
+  margin-bottom: 10px; }
+
+.fluxo-navegacao-CRC, .fluxo-navegacao-CRC__plantao, .fluxo-navegacao-CRC__processual--sem-caso, .fluxo-navegacao-CRC__processual--com-caso {
+  display: block;
+  list-style: none;
+  width: 100%;
+  padding: 0px !important;
+  margin-bottom: 30px;
+  margin-top: 0px;
+  height: 60px; }
+  .fluxo-navegacao-CRC:after, .fluxo-navegacao-CRC__plantao:after, .fluxo-navegacao-CRC__processual--sem-caso:after, .fluxo-navegacao-CRC__processual--com-caso:after {
+    display: block;
+    clear: both;
+    float: none; }
+  .fluxo-navegacao-CRC .item-text, .fluxo-navegacao-CRC__plantao .item-text, .fluxo-navegacao-CRC__processual--sem-caso .item-text, .fluxo-navegacao-CRC__processual--com-caso .item-text, .fluxo-navegacao-CRC .item-text__finalizar, .fluxo-navegacao-CRC__plantao .item-text__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .item-text__finalizar, .fluxo-navegacao-CRC__processual--com-caso .item-text__finalizar, .fluxo-navegacao-CRC .item-text__assunto, .fluxo-navegacao-CRC__plantao .item-text__assunto, .fluxo-navegacao-CRC__processual--sem-caso .item-text__assunto, .fluxo-navegacao-CRC__processual--com-caso .item-text__assunto, .fluxo-navegacao-CRC__processual--sem-caso .item-text__visualizar-andamento, .fluxo-navegacao-CRC__processual--sem-caso .item-text__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .item-text__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .item-text__encaminhar, .fluxo-navegacao-CRC__processual--com-caso .item-text__visualizar-andamento, .fluxo-navegacao-CRC__processual--com-caso .item-text__registrar-ocorrencia {
+    display: inline-block;
+    width: 80px;
+    position: absolute;
+    top: 5px;
+    left: 17px;
+    vertical-align: text-bottom;
+    text-align: right;
+    text-transform: uppercase;
+    line-height: 14px;
+    font-family: "robotoregular";
+    font-size: 11px; }
+    .fluxo-navegacao-CRC .item-text__finalizar, .fluxo-navegacao-CRC__plantao .item-text__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .item-text__finalizar, .fluxo-navegacao-CRC__processual--com-caso .item-text__finalizar {
+      top: 19px; }
+    .fluxo-navegacao-CRC .item-text__assunto, .fluxo-navegacao-CRC__plantao .item-text__assunto, .fluxo-navegacao-CRC__processual--sem-caso .item-text__assunto, .fluxo-navegacao-CRC__processual--com-caso .item-text__assunto {
+      left: 32px; }
+  .fluxo-navegacao-CRC .item-fluxo, .fluxo-navegacao-CRC__plantao .item-fluxo, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo, .fluxo-navegacao-CRC .item-fluxo__assunto, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__assunto, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__assunto, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__assunto, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__assunto, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__assunto, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__assunto, .fluxo-navegacao-CRC__plantao .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__assunto, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__assunto, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__assunto, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__assunto, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__assunto, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__assunto, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__assunto, .fluxo-navegacao-CRC .item-fluxo__documentos, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__documentos, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__documentos, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__documentos, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__documentos, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__documentos, .fluxo-navegacao-CRC__plantao .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__documentos, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__documentos, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__documentos, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__documentos, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos, .fluxo-navegacao-CRC .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC .item-fluxo__finalizar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__finalizar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__finalizar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__finalizar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__finalizar, .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__finalizar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__finalizar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__info-plantao, .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__info-plantao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__info-plantao, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__encaminhar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__encaminhar, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC .item-fluxo__registrar-ocorrencia-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__registrar-ocorrencia-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__registrar-ocorrencia-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia-desativado {
+    display: block;
+    position: relative;
+    float: left;
+    width: 151px;
+    height: 60px;
+    background-image: url(../images/icones-marcadores-CRC-nao-processual.png);
+    color: #1abc9c; }
+    .fluxo-navegacao-CRC .item-fluxo__assunto, .fluxo-navegacao-CRC__plantao .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__assunto {
+      background-position: -25px 0px;
+      width: 165px !important; }
+    .fluxo-navegacao-CRC .item-fluxo__documentos, .fluxo-navegacao-CRC__plantao .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos {
+      background-position: -39px -70px; }
+    .fluxo-navegacao-CRC .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos-desativado {
+      background-position: -249px -70px;
+      color: #d2d2d2 !important; }
+    .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao {
+      background-position: -39px -140px; }
+    .fluxo-navegacao-CRC .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao-desativado {
+      background-position: -249px -140px;
+      color: #d2d2d2 !important; }
+    .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao {
+      background-position: -39px -210px; }
+    .fluxo-navegacao-CRC .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao-desativado {
+      background-position: -249px -210px;
+      color: #d2d2d2 !important; }
+    .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar {
+      background-position: -39px -280px; }
+    .fluxo-navegacao-CRC .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar-desativado {
+      background-position: -249px -280px;
+      color: #d2d2d2 !important; }
+    .fluxo-navegacao-CRC .item-fluxo__finalizar, .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar {
+      background-position: -39px -350px; }
+    .fluxo-navegacao-CRC .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar-desativado {
+      background-position: -249px -350px;
+      color: #d2d2d2 !important; }
+
+.fluxo-navegacao-CRC__plantao .item-text, .fluxo-navegacao-CRC__plantao .item-text__finalizar, .fluxo-navegacao-CRC__plantao .item-text__assunto, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-text__visualizar-andamento, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-text__visualizar-andamento, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-text__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-text__selecionar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-text__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-text__detalhar-orgao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-text__encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-text__encaminhar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-text__visualizar-andamento, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-text__visualizar-andamento, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-text__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-text__registrar-ocorrencia {
+  top: 5px;
+  left: 92px; }
+  .fluxo-navegacao-CRC__plantao .item-text__finalizar {
+    top: 19px;
+    left: 116px; }
+  .fluxo-navegacao-CRC__plantao .item-text__assunto {
+    left: 67px; }
+
+.fluxo-navegacao-CRC__plantao .item-fluxo, .fluxo-navegacao-CRC__plantao .item-fluxo__assunto, .fluxo-navegacao-CRC__plantao .item-fluxo__documentos, .fluxo-navegacao-CRC__plantao .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__plantao .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__plantao .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__plantao .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar, .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao, .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__encaminhar, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__registrar-ocorrencia-desativado {
+  width: 230px;
+  box-sizing: border-box;
+  background-image: url(../images/icones-marcadores-CRC-nao-processual__info-plantao.png);
+  color: #1abc9c; }
+  .fluxo-navegacao-CRC__plantao .item-fluxo__assunto {
+    background-position: -66px 0px;
+    width: 205px !important; }
+  .fluxo-navegacao-CRC__plantao .item-fluxo__documentos {
+    background-position: -41px -70px; }
+  .fluxo-navegacao-CRC__plantao .item-fluxo__documentos-desativado {
+    background-position: 241px -70px; }
+  .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao {
+    background-position: -41px -140px; }
+  .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao-desativado {
+    background-position: -331px -140px;
+    color: #d2d2d2 !important; }
+  .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar {
+    width: 255px;
+    background-position: -16px -210px; }
+  .fluxo-navegacao-CRC__plantao .item-fluxo__finalizar-desativado {
+    width: 255px;
+    background-position: 266px -210px;
+    color: #d2d2d2 !important; }
+
+.fluxo-navegacao-CRC__processual--sem-caso .item-text, .fluxo-navegacao-CRC__processual--sem-caso .item-text__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .item-text__assunto, .fluxo-navegacao-CRC__processual--sem-caso .item-text__visualizar-andamento, .fluxo-navegacao-CRC__processual--sem-caso .item-text__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .item-text__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .item-text__encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-text__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-text__registrar-ocorrencia {
+  top: 5px;
+  left: 92px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-text__visualizar-andamento {
+    width: 141px;
+    left: 37px !important; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-text__selecionar-orgao {
+    left: 32px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-text__detalhar-orgao {
+    left: 32px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-text__encaminhar {
+    top: 19px;
+    left: 32px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-text__finalizar {
+    top: 19px;
+    left: 32px; }
+
+.fluxo-navegacao-CRC__processual--sem-caso .item-fluxo, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__info-plantao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__registrar-ocorrencia-desativado {
+  box-sizing: border-box;
+  background-image: url(../images/icones-marcadores-CRC-processual__SEM-caso.png);
+  color: #1abc9c; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__visualizar-andamento {
+    width: 236px !important;
+    background-position: -90px 0px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao {
+    width: 170px !important;
+    background-position: -156px -70px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__selecionar-orgao-desativado {
+    width: 170px !important;
+    background-position: -502px -70px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao {
+    width: 170px !important;
+    background-position: -156px -140px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__detalhar-orgao-desativado {
+    width: 170px !important;
+    background-position: -502px -140px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar {
+    width: 170px !important;
+    background-position: -846px -210px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar-desativado {
+    color: #d2d2d2 !important;
+    width: 170px !important;
+    background-position: -501px -210px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar {
+    width: 174px !important;
+    background-position: -156px -280px; }
+  .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__finalizar-desativado {
+    width: 174px !important;
+    background-position: -502px -280px; }
+
+.fluxo-navegacao-CRC__processual--com-caso .item-text, .fluxo-navegacao-CRC__processual--com-caso .item-text__finalizar, .fluxo-navegacao-CRC__processual--com-caso .item-text__assunto, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-text__selecionar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-text__selecionar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-text__detalhar-orgao, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-text__detalhar-orgao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-text__encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-text__encaminhar, .fluxo-navegacao-CRC__processual--com-caso .item-text__visualizar-andamento, .fluxo-navegacao-CRC__processual--com-caso .item-text__registrar-ocorrencia {
+  top: 5px;
+  left: 92px; }
+  .fluxo-navegacao-CRC__processual--com-caso .item-text__visualizar-andamento {
+    width: 141px;
+    left: 289px !important; }
+  .fluxo-navegacao-CRC__processual--com-caso .item-text__registrar-ocorrencia {
+    left: 292px; }
+
+.fluxo-navegacao-CRC__processual--com-caso .item-fluxo, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__assunto, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__documentos-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__selecionar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__detalhar-orgao-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__agendar-encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__finalizar-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__info-plantao, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__plantao .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__plantao .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__info-plantao-desativado, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__encaminhar, .fluxo-navegacao-CRC__processual--com-caso .fluxo-navegacao-CRC__processual--sem-caso .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__processual--sem-caso .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__encaminhar-desativado, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__visualizar-andamento, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia, .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia-desativado {
+  box-sizing: border-box;
+  background-image: url(../images/icones-marcadores-CRC-processual__COM-caso.png);
+  color: #1abc9c; }
+  .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__visualizar-andamento {
+    width: 489px !important;
+    background-position: -66px 0px; }
+  .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia {
+    width: 431px !important;
+    background-position: -124px -70px; }
+  .fluxo-navegacao-CRC__processual--com-caso .item-fluxo__registrar-ocorrencia-desativado {
+    width: 431px !important;
+    color: #d2d2d2 !important;
+    background-position: -592px -70px; }
+
+.lista-andamentos {
+  margin-top: 0px;
+  padding-left: 16px; }
+  .lista-andamentos .lista-item {
+    list-style: square;
+    padding: 2px 0px;
+    text-align: justify; }
+
+.tab__processosCRC {
+  padding: 15px 25px; }
+  .tab__processosCRC .ui-tabs-panel {
+    padding-top: 0px !important;
+    height: auto;
+    overflow: auto;
+    padding-right: 0px !important; }
+
+.tira-padding-right {
+  padding-right: 0px !important; }
+
+.titulo-ocorrencia {
+  padding: 5px;
+  font-size: 14px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  text-align: center; }
+
+.msg-atendimento-online {
+  padding: 0px;
+  border: none !important;
+  margin-top: 20px;
+  border-radius: 0px; }
+  .msg-atendimento-online__pessoa {
+    padding: 10px 14px; }
+    .msg-atendimento-online__pessoa:nth-child(even) {
+      background-color: #f3faff !important; }
+  .msg-atendimento-online__titulo {
+    text-transform: normal;
+    text-transform: none;
+    border-bottom: none;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-size: 14px; }
+  .msg-atendimento-online__titulo-nome-pessoa {
+    display: block;
+    float: left; }
+  .msg-atendimento-online__titulo-data {
+    display: block;
+    float: right; }
+  .msg-atendimento-online__txt {
+    font-size: 14px !important;
+    clear: both; }
+  .msg-atendimento-online .ui-panel-titlebar {
+    padding: 10px 14px;
+    border: none;
+    background-color: #c0e5ff;
+    border-radius: 0px;
+    text-transform: uppercase;
+    font-family: "robotobold"; }
+  .msg-atendimento-online .ui-panel-content {
+    padding: 0 !important; }
+
+.icone-status-agendamento__validado, .icone-status-agendamento__desmarcado, .icone-status-agendamento__pendente {
+  display: inline-block;
+  height: 33px;
+  width: 34px;
+  background-image: url(../images/icone-CRC-defensoria-cores-status.png);
+  background-repeat: no-repeat; }
+
+.icone-status-agendamento__validado {
+  background-position: -18px -22px; }
+
+.info-desmarcacao {
+  display: none;
+  position: absolute;
+  top: -30px;
+  right: -244px;
+  z-index: 999;
+  height: auto;
+  padding: 7px;
+  width: 250px;
+  background-color: #fffcc7;
+  text-align: left;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 4px #ddd;
+  border-radius: 2px;
+  border: 1px solid #fdf3b1;
+  color: #555; }
+  .info-desmarcacao__data {
+    color: #555;
+    font-size: 10px;
+    font-family: "robotobold"; }
+
+.icone-status-agendamento__desmarcado {
+  background-position: -89px -22px;
+  position: relative;
+  z-index: 0; }
+  .icone-status-agendamento__desmarcado:hover .info-desmarcacao {
+    display: block; }
+
+.icone-status-agendamento__pendente {
+  background-position: -161px -22px; }
+
+.titulo-visualizar-orgao {
+  text-align: center;
+  padding: 8px;
+  font-size: 20px;
+  background-image: url(../images/fundo-titulo02.png);
+  border-radius: 4px;
+  border: none; }
+
+.inline-block-element {
+  display: inline-block;
+  vertical-align: middle; }
+
+.item-categoria__column--arvore {
+  display: block;
+  float: left;
+  width: 360px; }
+
+.item-categoria__column--edicao {
+  display: block;
+  float: right;
+  width: 550px; }
+
+.item-categoria__tree-box {
+  border-radius: 0;
+  min-height: 150px;
+  width: 350px;
+  border: none; }
+  .item-categoria__tree-box .ui-treenode-label {
+    padding: 0px; }
+  .item-categoria__tree-box .ui-treenode-label.ui-state-highlight {
+    background-color: #daefff !important;
+    background-image: none; }
+
+.item-categoria__tree-box-element {
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding: 4px;
+  border-radius: 2px;
+  color: #444;
+  white-space: normal; }
+
+.item-categoria__img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px; }
+
+.item-categoria__sub-elemento--visualizacao {
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  padding: 8px 85px 8px 8px;
+  width: 100%;
+  margin: 12px 0 20px 0;
+  border: 1px solid #ccc; }
+
+.item-categoria__sub-elemento--opcoes {
+  display: block;
+  position: absolute;
+  width: 120px;
+  top: 5px;
+  right: 0px;
+  text-align: right; }
+
+.item-categoria__form-label {
+  width: 150px;
+  float: none;
+  clear: both;
+  text-align: left; }
+
+.item-categoria__input {
+  margin: 0 !important; }
+
+.item-categoria__datagrid .ui-g {
+  border: none; }
+
+.item-categoria__datagrid .ui-datagrid-content {
+  border: none;
+  padding: 0px; }
+
+.item-categoria__datagrid .ui-datagrid-column {
+  padding: 0px; }
+
+.item-categoria__datagrid .ui-panel {
+  padding: 0px;
+  margin-right: 10px; }
+
+.item-categoria__datagrid .ui-panel-titlebar {
+  border: none;
+  border-radius: 0px;
+  font-family: "robotobold";
+  padding-bottom: 5px; }
+
+.item-categoria__datagrid .ui-panel-content td {
+  text-align: center; }
+
+.item-categoria__datagrid-icons {
+  margin: auto; }
+
+.talkbox, .talkbox__ocorrencia, .talkbox__anotacao-resposta {
+  position: relative;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 10px; }
+  .talkbox label, .talkbox__ocorrencia label, .talkbox__anotacao-resposta label {
+    width: 160px !important; }
+  .talkbox__ocorrencia {
+    background: #e5f7fd;
+    margin-left: 22px;
+    margin-right: 60px;
+    border-top-left-radius: 0; }
+    .talkbox__ocorrencia:after {
+      background-color: #e5f7fd;
+      content: "\00a0";
+      display: block;
+      height: 29px;
+      width: 48px;
+      position: absolute;
+      top: 0px;
+      left: -11px;
+      border-radius: 8px;
+      transform: rotate(0deg) skew(46deg);
+      -moz-transform: rotate(0deg) skew(46deg);
+      -ms-transform: rotate(0deg) skew(46deg);
+      -o-transform: rotate(0deg) skew(46deg);
+      -webkit-transform: rotate(0deg) skew(46deg); }
+  .talkbox__anotacao-resposta {
+    background: #efefef;
+    margin-right: 22px;
+    margin-left: 60px; }
+  .talkbox__anotacao-resposta:after {
+    background-color: #efefef;
+    content: "\00a0";
+    display: block;
+    height: 29px;
+    width: 48px;
+    position: absolute;
+    top: 2px;
+    right: -11px;
+    border-radius: 8px;
+    transform: rotate(-43deg) skew(46deg);
+    -moz-transform: rotate(-43deg) skew(46deg);
+    -ms-transform: rotate(-43deg) skew(46deg);
+    -o-transform: rotate(-43deg) skew(46deg);
+    -webkit-transform: rotate(-43deg) skew(46deg); }
+  .talkbox__agrupa-links {
+    position: absolute;
+    z-index: 100;
+    top: 5px;
+    background-color: white;
+    right: 5px;
+    border-radius: 6px;
+    height: 33px;
+    padding: 0px 5px; }
+
+@font-face {
+  font-family: 'robotobold';
+  src: url("../fonts/roboto-bold-webfont.eot");
+  src: url("../fonts/roboto-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/roboto-bold-webfont.woff2") format("woff2"), url("../fonts/roboto-bold-webfont.woff") format("woff"), url("../fonts/roboto-bold-webfont.ttf") format("truetype"), url("../fonts/roboto-bold-webfont.svg#robotobold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'robotoregular';
+  src: url("../fonts/roboto-regular-webfont.eot");
+  src: url("../fonts/roboto-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/roboto-regular-webfont.woff2") format("woff2"), url("../fonts/roboto-regular-webfont.woff") format("woff"), url("../fonts/roboto-regular-webfont.ttf") format("truetype"), url("../fonts/roboto-regular-webfont.svg#robotoregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'robotothin';
+  src: url("../fonts/roboto-thin-webfont.eot");
+  src: url("../fonts/roboto-thin-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/roboto-thin-webfont.woff2") format("woff2"), url("../fonts/roboto-thin-webfont.woff") format("woff"), url("../fonts/roboto-thin-webfont.ttf") format("truetype"), url("../fonts/roboto-thin-webfont.svg#robotothin") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+body {
+  font-family: "robotoregular";
+  font-size: 13px; }
+
+input {
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px; }
+
+/* Dropdown Button */
+.dropbtn {
+    border-radius: 7px 7px 7px 7px;
+    background-color: #16a085;
+    color: white;
+    /*padding: 8px;*/
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+opacity: 0.9;
+    filter: alpha(opacity=90);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 1px 1px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #1abc9c;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #16a085;}
+
+
+.subtitle-settings {
+    position: relative;
+    font-family: "OpenSans-Bold";
+    text-transform: uppercase;
+    background-image: url(../images/subtitle-pattern.png);
+    height: 20px;
+    margin-top: -22px;
+    margin-right: 20px;
+}
+
+.subtitle-box {
+    display: block;
+    position: absolute;
+    background-color: white;
+    width: auto;
+    line-height: 20px;
+    padding-right: 7px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+.h3, h3 {
+    font-size: 17px;
+}
+.h1, .h2, .h3, h1, h2, h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+
+}
+
+[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+[data-title]:after {
+    content: attr(data-title);
+    position: absolute;
+    bottom: -1.6em;
+    right: 5%;
+    padding: 4px 4px 4px 8px;
+    color: #222;
+    white-space: nowrap;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0px 0px 4px #222;
+    -webkit-box-shadow: 0px 0px 4px #222;
+    box-shadow: 0px 0px 4px #222;
+    background-image: -moz-linear-gradient(top, #f8f8f8, #cccccc);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f8f8f8),color-stop(1, #cccccc));
+    background-image: -webkit-linear-gradient(top, #f8f8f8, #cccccc);
+    background-image: -moz-linear-gradient(top, #f8f8f8, #cccccc);
+    background-image: -ms-linear-gradient(top, #f8f8f8, #cccccc);
+    background-image: -o-linear-gradient(top, #f8f8f8, #cccccc);
+    opacity: 0;
+    z-index: 99999;
+    visibility: hidden;
+}
+[data-title] {
+    position: relative;
+}
+
+.autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+input[type=submit] {
+  background-color: #1abc9c;
+  color: #fff;
+  cursor: pointer;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+
+.borderRadius{-moz-border-radius:5px; border-radius:5px; }
+.borderRadiusTp{-moz-border-radius:5px 5px 0 0; border-radius:5px 5px 0 0;}
+.borderRadiusBtm{-moz-border-radius:0 0 5px 5px ; border-radius:0 0 5px 5px;}
+
+.ui-draggable, .ui-droppable {
+  background-position: top;
+}
+
+.divSelect{
+  margin-bottom: 20px;
+}

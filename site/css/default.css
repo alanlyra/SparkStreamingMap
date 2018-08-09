@@ -1,0 +1,51 @@
+body {
+    font-family: "Arial";
+    margin: 0px;
+    padding: 0px;
+}
+a {
+  color:blue;
+  text-decoration: none;
+}
+a:hover {
+  color:#007;
+  text-decoration: none;
+}
+
+table, tr, td {
+  margin: 0px;
+  padding: 0px;
+  border-spacing:0px;
+}
+
+p.title {
+    color: #333;
+    margin: 0px 0px 0px 11px;
+    font-size: 24px;
+    line-height: 26px;
+}
+
+.menuitem {
+    font-size: 12px;
+    font-weight: bold;
+    color:#FFF;
+    text-align: center;
+    padding: 0px 8px 0px 8px;
+}
+
+.menubar {
+  height: 30px;
+  padding: 1px 0px 0px;
+  margin: 0px 22px 0px 34px;
+  background-color:#666;
+}
+
+a.menuitem {
+  color:#FFF;
+  text-decoration: none;
+}
+
+a:hover {
+  color:#DDD;
+  text-decoration: none;
+}
