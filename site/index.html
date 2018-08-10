@@ -7,363 +7,82 @@
   	<meta charset="UTF-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-  	<link href="https://fonts.googleapis.com/css?family=Anton|Roboto:300,400,700" rel="stylesheet">
   	<link rel="stylesheet" href="css/normalize.css">
-  	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
   	<link rel="stylesheet" href="css/style.css">
-  	<title>Trabalho Spark - Big Data</title>
-    <!-- <link rel="stylesheet" type="text/css" href="/css/default.css"/> -->
+  	<title>Trabalho Big Data</title>
     <link rel="stylesheet" href="css/style-slider.css">
     <link href="./css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  	<!-- <script src="./js/jquery.min.js"></script> -->
-  	<script src="./js/d3.v3.min.js"></script>
-    <script src="./js/topojson.v1.min.js"></script>
-    <!-- <script src="./js/jquery-1.11.1.min.js"></script> -->
-    <!-- I recommend you host this file on your own, since this will change without warning -->
-    <script src="./js/datamaps.world.min.js?v=1"></script>
-    <script src="./json-csv/base-jogadores.js"></script>
-    <script src="./js/jogadores.js"></script>
-    <script src="./json-csv/all_countries_hash.js"></script>
     <link rel="stylesheet" href="./css/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="css/style-map.css">
+    <script src="https://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
   </head>
 
 <body style="padding:0px;">
-
 	<div class="site">
 		<header class="l-cabecalho">
  				<div class="container">
-					<!-- <a href="/index.html" class="logo-defensoria"></a> -->
 				  <table width=100%> <tr class="menubar"> <td width=100% style="background-color:#1abc9c"> <table> <tr>
     		</div>
       </div></tr></table></td></tr></table></div>
 		</header>
-
 		<main>
 			<header class="main-header">
-
-        <table>
-          <tr>
-            <td>
-              <script type="text/javascript">
-                      $(function(){
-                          sliderValue = [];
-                          sliderValue[0] = 1930;
-                          sliderValue[1] = 2014;
-                         for(var key in paisClube){
-                                if(key in paises){
-                                  if(key == "Brazil")
-                                    $('#countries').append('<option value="' + key + '" data-image="images/msdropdown/icons/blank.gif" data-imagecss="flag '+ paises[key]['sigla'].toLowerCase() +'" data-title="' + key + '" onclick="javascript:startMap();" selected="selected">' + key + '</option>');
-                                  else
-                                    $('#countries').append('<option value="' + key + '" data-image="images/msdropdown/icons/blank.gif" data-imagecss="flag '+ paises[key]['sigla'].toLowerCase() +'" data-title="' + key + '">' + key + '</option>');
-                                }
-                          }
-                          startMap();
-                          $('#countries').on("change", function(){
-                              startMap();
-                          });
-
-                      });
-
-
-              </script>
-              <!-- <select name="countries" id="countries" style="width:300px;"></select> -->
-            </td>
-            <td>
-              <!-- <button class="dropbtn" onclick="javascript:startMap();" style="height: 25px;width: 100px;">Aplicar</button> -->
-            </td>
-          </tr>
-        </table>
 			</header>
 
 			<div class="container">
-        <div class="divSelect" style="text-align: center">
-          <select name="countries" id="countries" style="width:300px; text-align: center"></select>
-        </div>
-        <!-- <script src='./js/jquery.min.js'></script> -->
-        <script  src="js/index.js"></script>
-        <script>
-          //Função responsável por criar o slider
-          $( function() {
-            //Variável que irá guardar o valor antes da mudança do slider
-            rangeValue = [];
-            $( "#slider-range" ).slider({
-              range: true,
-              min: 1930,
-              max: 2014,
-              step: 4,
-              values: [ 1930, 2014 ],
-              //Função a ser executada na hora do slide
-              slide: function( event, ui ) {
-                //Verifica se é um ano sem copa e atualiza com o novo ano (não funciona para todos os casos)
-                if(ui.values[ 0 ] == 1942 || ui.values[ 0 ] == 1946)
-                    ui.values[ 0 ] = 1950;
-                if(ui.values[ 1 ] == 1942 || ui.values[ 1 ] == 1946)
-                  ui.values[ 1 ] = 1950;
-
-                //Escreve a mensagem acima do slider (não funciona em todos os casos)
-                if(ui.values[ 0 ] == ui.values[ 1 ]){
-                  $( "#amount" ).val( "Copa de " + ui.values[ 0 ] );
-                }
-                else{
-                  $( "#amount" ).val( "Copa de " + ui.values[ 0 ] + " até Copa de " + ui.values[ 1 ] );
-                }
-
-              },
-              //Função a ser executada após o slide ter modificado
-              change: function( event, ui ) {
-                if(ui.values[ 0 ] == 1942 || ui.values[ 0 ] == 1946){
-                  //Verificação do slider menor
-                  //Se valor anterior for maior que o atual, estou diminuindo o valor do slider
-                  if(rangeValue[0] > ui.values[ 0 ]){
-                    $("#slider-range").slider('values',0,1938);
-
-                    //Escreve a mensagem acima do slider para os casos que o anterior não cobre
-                    if($("#slider-range").slider('values',0) == ui.values[ 1 ]){
-                      $( "#amount" ).val( "Copa de " + 1938 );
-                    }
-                    else{
-                      $( "#amount" ).val( "Copa de " + 1938 + " até Copa de " + ui.values[ 1 ] );
-                    }
-                  }
-                  else{
-                    $("#slider-range").slider('values',0,1950);
-                  }
-
-                }
-                //Verificação do slider maior
-                //Se valor anterior for maior que o atual, estou diminuindo o valor do slider
-                if(ui.values[ 1 ] == 1942 || ui.values[ 1 ] == 1946){
-                  if(rangeValue[1] > ui.values[ 1 ]){
-                    $("#slider-range").slider('values',1,1938);
-                    if(ui.values[ 0 ] == $("#slider-range").slider('values',1)){
-                      $( "#amount" ).val( "Copa de " + 1938 );
-                    }
-                    else{
-                      $( "#amount" ).val( "Copa de " + ui.values[ 0 ] + " até Copa de " + 1938 );
-                    }
-                  }
-                  else{
-                    $("#slider-range").slider('values',1,1950);
-                  }
-                }
-                sliderValue[0] = $("#slider-range").slider('values',0);
-                sliderValue[1] = $("#slider-range").slider('values',1);
-                startMap();
-              }
-
-            });
-            //Escreve a mensagem acima do slider para os casos que o anterior não cobre
-            $( "#amount" ).val( "Copa de " + $( "#slider-range" ).slider( "values", 0 ) +
-              " até Copa de " + $( "#slider-range" ).slider( "values", 1 ) );
-          } );
-
-          //Guarda o valor antigo do slider
-          $( function() {
-            $('#slider-range').on("slide", function(){
-               rangeValue[0] = $("#slider-range").slider('values',0);
-               rangeValue[1] = $("#slider-range").slider('values',1);
-
-            });
-
-            var start;
-
-
-            $( "#play" ).click(function() {
-              //Tempo em segundos
-              var tempo = 1.5;
-              start = 1930;
-              $("#slider-range").slider('disable');
-              $("#slider-range").slider('values',0,start);
-              $("#slider-range").slider('values',1,start);
-              $( "#amount" ).val( "Copa de " + start );
-              start += 4;
-
-              refresh = setInterval(function(){
-                $("#slider-range").slider('values',0,start);
-                $("#slider-range").slider('values',1,start);
-                $( "#amount" ).val( "Copa de " + start );
-                start += 4;
-                if(start == 1942)
-                  start = 1950;
-                if(start > 2018){
-                  $("#slider-range").slider('values',0,1930);
-                  $("#slider-range").slider('values',1,2014);
-                  $( "#amount" ).val( "Copa de " + 1930 + " até Copa de " + 2014 );
-                  $("#slider-range").slider('enable');
-                  clearInterval(refresh);
-                  $("#stop").hide();
-                  $("#play").show();
-                }
-              }, tempo*1000);
-
-              $("#play").hide();
-              $("#stop").show();
-
-            });
-
-            $( "#stop" ).click(function() {
-              $("#slider-range").slider('values',0,1930);
-              $("#slider-range").slider('values',1,2014);
-              $( "#amount" ).val( "Copa de " + 1930 + " até Copa de " + 2014 );
-              clearInterval(refresh);
-              $("#stop").hide();
-              $("#play").show();
-            });
-          });
-
-        </script>
         <p>
-          <!-- <label for="amount">Copas</label> -->
           <input type="text" id="amount" readonly style="border:0; color:#06928a; font-weight:bold; text-align: center; font-size: 16px;">
         </p>
-
-        <div id="slider-range" style="width: 90%; float: left; margin-top: 13px;"></div>
-        <div id="slider-play" style="width: 8%; float: right;">
-          <button type="button" id="play" class="btn btn-success" style="width: 100%;">Play</button>
-          <button type="button" id="stop" class="btn btn-danger" style="width: 100%; display: none" >Stop</button>
-        </div>
 				<table>
   				<tr>
   				    <td width=470 valign=top>
-          				<h3 id="PanelClub" class="subtitle-settings" style="visibility: hidden;">
-          				    <span id="mediaName" class="subtitle-box"></span>
-          				</h3>
-          				<!-- Club Details Panel-->
-
-          				<h3 id="PanelClubDetails" class="subtitle-settings" style="visibility: hidden;">
-          				    <span class="subtitle-box">Clube</span>
-          				</h3>
           				<!-- Map Panel-->
-
-                  <div id="container1" style="position: relative; width: 100%;"></div>
+                  <div id="map"></div>
   				    </td>
   				</tr>
 				</table>
 			</div>
 		</main>
-
 		<footer class="l-footer">
       	<span class="versao-sistema">  </span>
-        <img src="images/logo-fifa.png" alt="COPPE" class="logo-desfensoria" style="width:120px; height:"90px"">
-        <img src="images/logo-coppe.png" alt="FIFA" class="logo-desfensoria" style="width:120px; height:"90px"">
+        <img src="images/logo-fetranspor.png" alt="FETRANSPOR" class="logo-desfensoria" style="width:120px; height:"90px"">
+        <img src="images/logo-coppe.png" alt="COPPE" class="logo-desfensoria" style="width:120px; height:"90px"">
     </footer>
 	</div>
-	<!-- <script src="js/jquery.min.js"></script> -->
-	<!-- <script src="js/jquery.bundle.min.js"></script> -->
 </body>
 
-<!-- <msdropdown> -->
-<link rel="stylesheet" type="text/css" href="css/msdropdown/dd.css" />
-<script src="js/msdropdown/jquery.dd.min.js"></script>
-<!-- </msdropdown> -->
-<link rel="stylesheet" type="text/css" href="css/msdropdown/flags.css" />
-<script>
-
-  $(document).ready(function() {
-  	$("#countries").msDropdown();
-  })
-
-</script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
 
 <script>
 
- function startMap() {
-    latLong = {};
-    final = [];
-    var pais = $("#countries").val();
-    var bubbles = {};
-    bubblesFinal = [];
+    $( "#amount" ).val( "Linha 5704A1" );
 
-    // for(paisI in paisClube){
-    //   for(year in paisClube[paisI]){
-    //     for(origem in paisClube[paisI][year]){
-    //       if(!paises[origem]){
-    //         console.log(origem);
-    //       }
-    //     }
-    //   }
-    // }
-
-    for(year in paisClube[pais]){
-
-        for(origem in paisClube[pais][year]){
-          if(year >= sliderValue[0] && year <= sliderValue[1]){
-            if(paises[origem]){
-              if(origem != pais){
-                  latLong["origin"] = {"latitude": paises[origem]["lat"], "longitude": paises[origem]["lon"]};
-                  latLong["destination"] = {"latitude": paises[pais]["lat"], "longitude": paises[pais]["lon"]};
-                  latLong["options"] = {"strokeWidth": (paisClube[pais][year][origem]/23)*10}
-                  final.push(latLong);
-                  latLong = {};
-              }
-
-              bubbles = {"name": origem, "latitude": paises[origem]["lat"], "longitude": paises[origem]["lon"], radius: ((paisClube[pais][year][origem]/23)*15)+2, fillKey: 'gt50', borderWidth: 0.7, "copa":year + "'s World Cup", "qtdJogadores": paisClube[pais][year][origem]};
-              bubblesFinal.push(bubbles);
-              bubbles = {}
-            }
-          }
-        }
-
+    var locations = [
+    	['<b>England Branch,</b><br> International city', -22.970722, -43.182365, 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"],
+    	['<b>Greec Branch,</b><br> International city', -22.990722, -43.182365, 1, "https://maps.google.com/mapfiles/ms/micons/bus.png"]
+    ];
+    var map = new google.maps.Map(document.getElementById('map'), {
+    	zoom: 13,
+    	center: new google.maps.LatLng(-22.970722, -43.182365), //Copacabana LatLong
+    	mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    var infowindow = new google.maps.InfoWindow();
+    var marker, i;
+    for (i = 0; i < locations.length; i++) {
+    	marker = new google.maps.Marker({
+    		position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+    		icon: locations[i][4],
+    		map: map
+    	});
+    	google.maps.event.addListener(marker, 'click', (function (marker, i) {
+    		return function () {
+    			infowindow.setContent(locations[i][0]);
+    			infowindow.open(map, marker);
+    		}
+    	})(marker, i));
     }
-
-  d3.csv("", function(json){
-
-   map.arc(final);
-
-   map.bubbles(bubblesFinal, {
-     popupTemplate: function(geo, data) {
-       return "<div class='hoverinfo' style='text-align: center'>"
-       + data.copa +
-       "<br/><b>"
-       + data.name +
-       "</b><br/>"
-       + data.qtdJogadores +
-       " players</div>";
-     }
-   });
-  });
- }
-
-  var map = new Datamap({
-    scope: 'world',
-    element: document.getElementById('container1'),
-    projection: 'mercator',
-    height: 500,
-    width: 900,
-    geographyConfig: {
-            highlightOnHover: true,
-            popupOnHover: true
-    },
-    fills: {
-      // defaultFill: '#f0af0a',
-      defaultFill: '#b1dad2',
-      // lt50: 'rgba(0,244,244,0.9)',
-      lt50: 'rgba(20,20,20,0.9)',
-      gt50: 'red'
-    },
-    done: function(datamap) {
-            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-                link = geography.properties.name;
-                $("li").removeClass("selected");
-                $("li[title="+link+"]").addClass("selected");
-                $(".ddTitleText ").click();
-                $(".ddTitleText ").click();
-            });
-    },
-
-    data: {
-      // USA: {fillKey: 'lt50' },
-      // RUS: {fillKey: 'lt50' },
-      // CAN: {fillKey: 'lt50' },
-      // BRA: {fillKey: 'gt50' },
-      // ARG: {fillKey: 'gt50'},
-      // COL: {fillKey: 'gt50' },
-      // AUS: {fillKey: 'gt50' },
-      // ZAF: {fillKey: 'gt50' },
-      // MAD: {fillKey: 'gt50' }
-    }
-  })
 
 </script>
