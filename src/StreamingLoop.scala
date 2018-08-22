@@ -287,7 +287,7 @@ object StreamingLoop {
     }
     
     // Delete outs
-    // Delete prov & Spark files
+    // Delete Spark files
     for (i <- from to data_out.length-1){ 
       deleteRecursively(new File(data_out(i)))
     }
