@@ -30,10 +30,9 @@ import org.apache.spark.sql.streaming.StreamingQueryListener
 
 object StreamingLoop {
   
-  /*
-   * Execution time
-   */
   
+  //Execution time
+
   def time[R](block: => R): R = {  
     val t0 = System.nanoTime()
     val result = block    // call-by-name
@@ -42,21 +41,17 @@ object StreamingLoop {
     result
 }
 
-  /*
-   * Filesystem vars & functions
-   */
-
+  // Filesystem vars & functions
+   
   val base_dir: String = "/home/alan/git/SparkStreamingMap/exec"
-  val data_dir: String = /*base_dir +*/ "/data"
-  val query_dir: String = /*base_dir +*/ "/query"
-  val prov_dir: String = /*base_dir +*/ "/prov"
-  val out_dir: String =  /*base_dir +*/ "/out"
+  val data_dir: String = "/data"
+  val query_dir: String = "/query"
+  val out_dir: String =  "/out"
   
   // Arrays containing directories and query files
   var steps: Int = 0
   var data_in: Array[String] = Array.empty[String]
   var data_out: Array[String] = Array.empty[String]
-  var data_prov: Array[String] = Array.empty[String]
   var query_file: Array[File] = Array.empty[File]
   
  
@@ -125,12 +120,10 @@ object StreamingLoop {
       return
     }
     println("Detected " + stepDirs.length + " steps for this workflow. ")
-//    stepDirs.foreach(s => println(s.getAbsolutePath))
     
     steps = stepDirs.length
     data_in = new Array[String](stepDirs.length)
     data_out = new Array[String](stepDirs.length)
-    data_prov = new Array[String](stepDirs.length)
     query_file = new Array[File](stepDirs.length)
     
     // Queries / Data
@@ -145,10 +138,7 @@ object StreamingLoop {
         queryFiles += (s -> files.last)
     }
     
-//    queryFiles.keys.foreach(k => 
-//      println("Step: " + k.getName + " | Query: " + queryFiles(k).getName)
-//    )
-          
+
     if (queryFiles.size < stepDirs.length) {
       val missing = stepDirs.filterNot(queryFiles.keys.toList.contains(_))
       println ("Missing query files in:")
@@ -163,8 +153,6 @@ object StreamingLoop {
       println("Missing initial data in " + stepDirs(0).getAbsolutePath + data_dir)
       return
     }
-//    else
-//      println("Data found in " +  stepDirs(0).getAbsolutePath + data_dir)
 
     var i: Int = 0
     stepDirs.sliding(2).foreach { s =>
@@ -172,30 +160,17 @@ object StreamingLoop {
       query_file(i) = queryFiles(s(0))
       
       new File(s(1).getAbsolutePath + data_dir).mkdirs
-      data_out(i) = s(1).getAbsolutePath + data_dir
-      new File(s(0).getAbsolutePath + prov_dir).mkdirs
-      data_prov(i) = s(0).getAbsolutePath + prov_dir
+      data_out(i) = s(1).getAbsolutePath + data_dir 
       i+=1
     }
     data_in(i) = stepDirs.last.getAbsolutePath + data_dir
     query_file(i) = queryFiles(stepDirs.last)
     
     new File(base_dir + out_dir).mkdirs
-    data_out(i) = base_dir + out_dir
-    new File(stepDirs.last.getAbsolutePath + prov_dir).mkdirs
-    data_prov(i) = stepDirs.last.getAbsolutePath + prov_dir
-    
-//    println()
-//    for(i <- 0 to stepDirs.length -1){
-//      println("Step: " + (i+1) + " | In: " + data_in(i) 
-//          + " | Query: " + query_file(i).getAbsolutePath + " | Out: " + data_out(i))
-//    }
-    
+    data_out(i) = base_dir + out_dir   
   }
-    
-  /*
-   *  DirectoryWatcher: watch file changes
-   */
+       
+  // DirectoryWatcher: watch file changes 
 
   class DirectoryWatcher(val stepNumber: Int, val path: Path, val query_id: UUID) extends Runnable {
 
@@ -214,20 +189,7 @@ object StreamingLoop {
         
         val text = "\nDetected human-in-the-loop: '" + event_path + 
         "' at the moment: " + Calendar.getInstance().getTime()
-        
-        val write = new PrintWriter(new FileOutputStream(
-            new File(data_prov(stepNumber-1) + "/hil.txt"), true))
-        write.write(text)
-        if (kind.equals(ENTRY_CREATE)) {
-          val old_query = Source.fromFile(query_file(stepNumber-1)).mkString
-          write.write("\r\nOld content:")
-          write.write(old_query)
-        }
-        val new_query = Source.fromFile(query_file(stepNumber-1).getParent + "/" + event_path.toString).mkString
-        write.write("\r\nNew content:")
-        write.write(new_query)
-        write.close()
-        
+ 
         query_file(stepNumber-1) = new File(query_file(stepNumber-1).getParent + "/" + event_path.toString)
         createWorkflow(from=stepNumber-1)
         watchService.take().cancel()
@@ -238,7 +200,6 @@ object StreamingLoop {
 
     override def run(): Unit = {
       try {
-        //breakable {
         while (true) {
           var watchKey: WatchKey = null
           try { watchKey = watchService.take() } catch { case ie: InterruptedException => println("InterruptedException: " + ie) }
@@ -252,7 +213,6 @@ object StreamingLoop {
             watchService.close()
             return
           }
-          //  }
         }
       } catch {
         case ie: InterruptedException => println("InterruptedException: " + ie)
@@ -261,10 +221,8 @@ object StreamingLoop {
       }
     }
   }
-
-  /*
-   * Spark vars & functions
-   */
+ 
+  // Spark vars & functions
   
   var query_ids: Array[UUID] = Array.empty[UUID]
   var streaming_queries: Array[StreamingQuery] = Array.empty[StreamingQuery]
@@ -294,23 +252,17 @@ object StreamingLoop {
        
   val queryListener = new StreamingQueryListener() {
     
-    override def onQueryStarted(event: StreamingQueryListener.QueryStartedEvent): Unit =  {
-      //println(s"Query ${event.id} (${event.name}) started")  
+    override def onQueryStarted(event: StreamingQueryListener.QueryStartedEvent): Unit =  {     
     }
     override def onQueryProgress(event: StreamingQueryListener.QueryProgressEvent): Unit = {
       val stepNumber = query_ids.indexOf(event.progress.id)
       if (stepNumber > -1) {
-        //println(s"Query ${event.progress.id} (${event.progress.name}) progress")
         val stepNumber = query_ids.indexOf(event.progress.id)
         val progressJson = event.progress.prettyJson
-        val write = new PrintWriter(new FileOutputStream(
-            new File(data_prov(stepNumber) + "/queryExecution_" + event.progress.id + "_" + event.progress.batchId + ".json"), true))
-        write.write(progressJson)
-        write.close()
+        
       }
     }
-    override def onQueryTerminated(event: StreamingQueryListener.QueryTerminatedEvent): Unit =  {
-      //println(s"Query ${event.id} terminated")
+    override def onQueryTerminated(event: StreamingQueryListener.QueryTerminatedEvent): Unit =  {     
     }
   }
   
@@ -338,7 +290,6 @@ object StreamingLoop {
     // Delete prov & Spark files
     for (i <- from to data_out.length-1){ 
       deleteRecursively(new File(data_out(i)))
-      deleteRecursively(new File(data_prov(i)))
     }
     
     for (i <- from to steps-1) {
@@ -365,9 +316,6 @@ object StreamingLoop {
     
     println("\r\nWorkflow created successfully")
   }
-  
-  
-  
 
   def createNewQuery(stepNumber: Int, in: String, query_file: File, out: String, verbose: Boolean = false): Unit = {
 
@@ -395,8 +343,6 @@ object StreamingLoop {
         data
 
     val query_data = dataTimestamp
-//      .withWatermark("datahora", "10 minutes")
-//      .dropDuplicates("codigo", "datahora")
 
     query_data.createOrReplaceTempView(session_name + stepNumber)
 
@@ -406,24 +352,13 @@ object StreamingLoop {
     val queryDF = session.sql(query_text)
     println("OK.")
 
-//    // Prov output (batch files)
-//
-//    val batch_sq = queryDF.writeStream
-//      .queryName(session_name + session_number + "_S" + stepNumber + "_batch")
-//      .outputMode("append")
-//      .format("csv")
-//      .option("checkpointLocation", "checkpoint")
-//      .start("file://" + data_prov(stepNumber-1) + "/batches/")
-      
-    // Data output (file)
-
     print("Start stream processing: ")
     val output_sq = queryDF.repartition(1).writeStream
       .queryName(session_name + session_number + "_S" + stepNumber)
       .outputMode("append")
       .format("csv")
       .option("header",true)
-      .option("checkpointLocation", data_prov(stepNumber-1) + "/checkpoint")
+      .option("checkpointLocation", data_out(stepNumber-1) + "/checkpoint")
       .option("path", "file://" + data_out(stepNumber-1))
       .trigger(ProcessingTime("5 seconds"))
       .start()
@@ -441,10 +376,9 @@ object StreamingLoop {
     
     println("Query started successfully. ID: " + output_sq.id)
   }
-
-  /*
-   * Main function
-   */
+  
+  // Main function
+  
   def main(args: Array[String]) {
     
     Logger.getLogger("org").setLevel(Level.OFF)
