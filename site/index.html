@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
     <link rel="stylesheet" href="css/style-map.css">
-    <script src="https://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <!-- <script src="dir.php"></script> -->
 
   </head>
 
@@ -31,10 +32,12 @@
 			<header class="main-header">
 			</header>
 
-			<div class="container">
+			<div class="container" >
+
         <p>
           <input type="text" id="amount" readonly style="border:0; color:#06928a; font-weight:bold; text-align: center; font-size: 16px;">
         </p>
+
 				<table>
   				<tr>
   				    <td width=470 valign=top>
@@ -58,46 +61,40 @@
 <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
 
+
+
 <script>
 
     var positions;
+    var map;
+    var locations;
 
-    $.ajax({
-      type: "GET",
-      url: "0.csv",
-      dataType: "text",
-      success: function(csv) {
-      //toJSON function here
-      csvJSON(csv);
-      }
-    });
+    function reload(){
+      $.ajax({
+          url: 'dir.php',
+          type: 'post',
+          data: { "callFunc1": "../exec/out/"},
+          success: function(response) { console.log(response); }
+      });
+    }
 
     function csvJSON(csv){
-
+      // console.log(csv);
       var lines=csv.split("\n");
-
       var result = [];
-
       var headers=lines[0].split(",");
-
       for(var i=1;i<lines.length;i++){
-
     	  var obj = {};
     	  var currentline=lines[i].split(",");
-
     	  for(var j=0;j<headers.length;j++){
     		  obj[headers[j]] = currentline[j];
     	  }
-
     	  result.push(obj);
-
-        //console.log(obj);
-
+        // console.log(result);
       }
 
-      //return result; //JavaScript object
-      //console.log(JSON.stringify(result)); //JSON
       positions = result;
+      console.log(positions);
     }
 
 
@@ -105,15 +102,36 @@
 
 <script>
   $(function(){
-    $( "#amount" ).val( "Linha 5704A1" );
-    // console.log(positions);
-    var locations = [];
+
+
+    $.ajax({
+      type: "GET",
+      //url: "0.csv",
+      url: "0.csv",
+      dataType: "text",
+      success: function(csv) {
+      //toJSON function here
+      csvJSON(csv);
+      initMap();
+      }
+    });
+
+
+
+  });
+
+  function initMap(){
+    $( "#amount" ).val( "BRT - Linha 42" );
+    console.log(positions);
+    locations = [];
+
     for(chave in positions){
-      console.log(positions[chave]["latitude"]);
+      // console.log(positions[chave]["latitude"]);
 
-      if(positions[chave]["codigo"] == "30536")
-        locations.push(['<b>' + positions[chave]["linha"] + '</b><br>' + positions[chave]["codigo"], positions[chave]["latitude"], positions[chave]["longitude"], 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"]);
-
+      if(positions[chave]["linha"] == "42"){
+        locations.push(['<b> Linha: ' + positions[chave]["linha"] + '</b><br> Veículo: ' + positions[chave]["codigo"], positions[chave]["latitude"], positions[chave]["longitude"], 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"]);
+        // console.log("oi");
+      }
 
       // locations = [
       // 	['<b>England Branch,</b><br> International city', -22.970722, -43.182365, 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"],
@@ -121,26 +139,28 @@
       // ];
 
     }
-    var map = new google.maps.Map(document.getElementById('map'), {
-    	zoom: 11,
-    	center: new google.maps.LatLng(-22.970722, -43.182365), //Copacabana LatLong
-    	mapTypeId: google.maps.MapTypeId.ROADMAP
+    // console.log(locations);
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 11,
+      center: new google.maps.LatLng(-22.970722, -43.182365), //Copacabana LatLong
+      mapTypeId: google.maps.MapTypeId.ROADMAP
     });
     var infowindow = new google.maps.InfoWindow();
+
     var marker, i;
     for (i = 0; i < locations.length; i++) {
-    	marker = new google.maps.Marker({
-    		position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-    		icon: locations[i][4],
-    		map: map
-    	});
-    	google.maps.event.addListener(marker, 'click', (function (marker, i) {
-    		return function () {
-    			infowindow.setContent(locations[i][0]);
-    			infowindow.open(map, marker);
-    		}
-    	})(marker, i));
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        icon: locations[i][4],
+        map: map
+      });
+      google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        return function () {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
     }
-  });
+  }
 
 </script>
