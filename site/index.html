@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
     <link rel="stylesheet" href="css/style-map.css">
-    <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <script src="https://maps.google.com/maps/api/js?sensor=false&"></script>
     <!-- <script src="dir.php"></script> -->
 
   </head>
@@ -58,7 +58,7 @@
 	</div>
 </body>
 
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="./js/jquery/jquery-2.1.4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js"></script>
 
 
@@ -68,18 +68,35 @@
     var positions;
     var map;
     var locations;
+    var infowindow;
+    var markers = [];
 
-    function reload(){
+
+    function reload(async){
       $.ajax({
+          async: async,
           url: 'dir.php',
           type: 'post',
           data: { "callFunc1": "../exec/out/"},
-          success: function(response) { console.log(response); }
+          success: function(response) {
+            $.ajax({
+              async: async,
+              type: "GET",
+              //url: "0.csv",
+              url: "../exec/out/"+response,
+              dataType: "text",
+              success: function(csv) {
+              //toJSON function here
+              csvJSON(csv);
+              addMarker();
+              }
+            });
+          }
       });
     }
 
     function csvJSON(csv){
-      // console.log(csv);
+      positions = null;
       var lines=csv.split("\n");
       var result = [];
       var headers=lines[0].split(",");
@@ -90,11 +107,9 @@
     		  obj[headers[j]] = currentline[j];
     	  }
     	  result.push(obj);
-        // console.log(result);
       }
 
       positions = result;
-      console.log(positions);
     }
 
 
@@ -102,65 +117,65 @@
 
 <script>
   $(function(){
-
-
-    $.ajax({
-      type: "GET",
-      //url: "0.csv",
-      url: "0.csv",
-      dataType: "text",
-      success: function(csv) {
-      //toJSON function here
-      csvJSON(csv);
-      initMap();
-      }
-    });
-
-
-
-  });
-
-  function initMap(){
+    reload(false);
     $( "#amount" ).val( "BRT - Linha 42" );
-    console.log(positions);
     locations = [];
 
     for(chave in positions){
-      // console.log(positions[chave]["latitude"]);
 
       if(positions[chave]["linha"] == "42"){
         locations.push(['<b> Linha: ' + positions[chave]["linha"] + '</b><br> Veículo: ' + positions[chave]["codigo"], positions[chave]["latitude"], positions[chave]["longitude"], 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"]);
-        // console.log("oi");
       }
 
-      // locations = [
-      // 	['<b>England Branch,</b><br> International city', -22.970722, -43.182365, 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"],
-      // 	['<b>Greec Branch,</b><br> International city', -22.990722, -43.182365, 1, "https://maps.google.com/mapfiles/ms/micons/bus.png"]
-      // ];
-
     }
-    // console.log(locations);
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 11,
       center: new google.maps.LatLng(-22.970722, -43.182365), //Copacabana LatLong
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-    var infowindow = new google.maps.InfoWindow();
+    infowindow = new google.maps.InfoWindow();
+    var timer = setInterval(recarregar, 5000);
+  });
 
-    var marker, i;
-    for (i = 0; i < locations.length; i++) {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        icon: locations[i][4],
-        map: map
-      });
-      google.maps.event.addListener(marker, 'click', (function (marker, i) {
-        return function () {
-          infowindow.setContent(locations[i][0]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
+   function recarregar() {
+     reload(true);
+   }
+  function deleteMarkers() {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
     }
+  }
+
+
+  function addMarker(){
+    if (typeof markers !== 'undefined') {
+      deleteMarkers();
+    }
+    var marker, i;
+    if (typeof locations !== 'undefined') {
+      locations = [];
+      for(chave in positions){
+
+          locations.push(['<b> Linha: ' + positions[chave]["linha"] + '</b><br> Veículo: ' + positions[chave]["codigo"], positions[chave]["latitude"], positions[chave]["longitude"], 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"]);
+          console.log(positions);
+
+      }
+      for (i = 0; i < locations.length; i++) {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+          icon: locations[i][4],
+          map: map
+        });
+        markers.push(marker);
+        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+          return function () {
+            infowindow.setContent(locations[i][0]);
+            infowindow.open(map, marker);
+          }
+        })(marker, i));
+      }
+    }
+
   }
 
 </script>
