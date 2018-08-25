@@ -329,7 +329,7 @@ object StreamingLoop {
 
     print("Read input folder: ")
     val data = session.readStream
-      .option("maxFilesPerTrigger", 5)
+      .option("maxFilesPerTrigger", 1)
       .option("inferSchema", true)
       .option("header", true)
       .option("mode","DROPMALFORMED")
