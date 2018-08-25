@@ -37,14 +37,103 @@
         <p>
           <input type="text" id="amount" readonly style="border:0; color:#06928a; font-weight:bold; text-align: center; font-size: 16px;">
         </p>
-
+        <select id="linha">
+          <option value="BRTUFRJ">BRTUFRJ</option>
+        	<option value="5800A1">5800A1</option>
+        	<option value="702A1">702A1</option>
+        	<option value="5804A1">5804A1</option>
+        	<option value="355A1">355A1</option>
+        	<option value="871A1">871A1</option>
+        	<option value="40">40</option>
+        	<option value="890A1">890A1</option>
+        	<option value="76">76</option>
+        	<option value="50">50</option>
+        	<option value="610A1">610A1</option>
+        	<option value="5850A1">5850A1</option>
+        	<option value="SV823A">SV823A</option>
+        	<option value="5801A1">5801A1</option>
+        	<option value="5805A1">5805A1</option>
+        	<option value="853V1">853V1</option>
+        	<option value="42">42</option>
+        	<option value="21A">21A</option>
+        	<option value="25">25</option>
+        	<option value="858A1">858A1</option>
+        	<option value="5808A1">5808A1</option>
+        	<option value="882A1">882A1</option>
+        	<option value="5700A1">5700A1</option>
+        	<option value="928A1">928A1</option>
+        	<option value="5707A1">5707A1</option>
+        	<option value="854B1">854B1</option>
+        	<option value="853A1">853A1</option>
+        	<option value="721A1">721A1</option>
+        	<option value="5702A1">5702A1</option>
+        	<option value="LECD23">LECD23</option>
+        	<option value="879A1">879A1</option>
+        	<option value="897A1">897A1</option>
+        	<option value="891A1">891A1</option>
+        	<option value="883A1">883A1</option>
+        	<option value="991A1">991A1</option>
+        	<option value="5800N1">5800N1</option>
+        	<option value="827A1">827A1</option>
+        	<option value="873A1">873A1</option>
+        	<option value="38">38</option>
+        	<option value="896A1">896A1</option>
+        	<option value="34">34</option>
+        	<option value="5704A1">5704A1</option>
+        	<option value="954A1">954A1</option>
+        	<option value="5802A1">5802A1</option>
+        	<option value="817A1">817A1</option>
+        	<option value="22">22</option>
+        	<option value="832A1">832A1</option>
+        	<option value="5704N1">5704N1</option>
+        	<option value="856A1">856A1</option>
+        	<option value="910A">910A</option>
+        	<option value="SR872A1">SR872A1</option>
+        	<option value="855A1">855A1</option>
+        	<option value="8">8</option>
+        	<option value="25">25</option>
+        	<option value="610A1">610A1</option>
+        	<option value="5707A1">5707A1</option>
+        	<option value="53">53</option>
+        	<option value="5702A1">5702A1</option>
+        	<option value="877A1">877A1</option>
+        	<option value="5805A1">5805A1</option>
+        	<option value="5800A1">5800A1</option>
+        	<option value="953A1">953A1</option>
+        	<option value="916A1">916A1</option>
+        	<option value="5850A1">5850A1</option>
+        	<option value="828A1">828A1</option>
+        	<option value="932A1">932A1</option>
+        	<option value="810A">810A</option>
+        	<option value="55">55</option>
+        	<option value="939A">939A</option>
+        	<option value="721A1">721A1</option>
+        	<option value="SR870A">SR870A</option>
+        	<option value="SV870A1">SV870A1</option>
+        	<option value="5809A1">5809A1</option>
+        	<option value="875A1">875A1</option>
+        	<option value="5700N1">5700N1</option>
+        	<option value="963A1">963A1</option>
+        	<option value="5850N1">5850N1</option>
+        	<option value="5811N1">5811N1</option>
+        	<option value="896N1">896N1</option>
+        	<option value="094A1">094A1</option>
+        	<option value="810A1">810A1</option>
+        	<option value="SP899">SP899</option>
+        	<option value="90">90</option>
+        	<option value="5703A1">5703A1</option>
+        	<option value="891N1">891N1</option>
+        	<option value="5805N">5805N</option>
+        	<option value="5706A1">5706A1</option>
+        	<option value="19">19</option>
+        	<option value="355N1">355N1</option>
+        	<option value="SV870">SV870</option>
+        	<option value="5811A1">5811A1</option>
+        </select>
 				<table>
   				<tr>
   				    <td width=470 valign=top>
-          				<!-- Map Panel-->
                    <div id="map"></div>
-
-                  <!-- <div id="csvdata"> -->
   				    </td>
   				</tr>
 				</table>
@@ -112,24 +201,42 @@
       positions = result;
     }
 
+    function renameQuery(linha){
+      $.ajax({
+          // async: async,
+          url: 'dir.php',
+          type: 'post',
+          data: { "renameQuery": linha},
+          success: function(response) {
+            if(response){
+              console.log("query alterada");
+            }
+          }
+      });
+    }
+
 
 </script>
 
 <script>
   $(function(){
+
+    $('select').on('change', function() {
+        $( "#amount" ).val( "BRT - Linha " + this.value );
+        renameQuery(this.value);
+    });
+
     reload(false);
-    $( "#amount" ).val( "BRT - Linha 42" );
+    $( "#amount" ).val( "BRT - Linha BRTUFRJ" );
+    renameQuery("BRTUFRJ");
     locations = [];
 
     for(chave in positions){
-
-      if(positions[chave]["linha"] == "42"){
+      if(positions[chave]["linha"] == $('select').val())
         locations.push(['<b> Linha: ' + positions[chave]["linha"] + '</b><br> Veículo: ' + positions[chave]["codigo"], positions[chave]["latitude"], positions[chave]["longitude"], 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"]);
-      }
-
     }
     map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 11,
+      zoom: 10,
       center: new google.maps.LatLng(-22.970722, -43.182365), //Copacabana LatLong
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
@@ -146,7 +253,6 @@
     }
   }
 
-
   function addMarker(){
     if (typeof markers !== 'undefined') {
       deleteMarkers();
@@ -155,10 +261,8 @@
     if (typeof locations !== 'undefined') {
       locations = [];
       for(chave in positions){
-
+        if(positions[chave]["linha"] == $('select').val())
           locations.push(['<b> Linha: ' + positions[chave]["linha"] + '</b><br> Veículo: ' + positions[chave]["codigo"], positions[chave]["latitude"], positions[chave]["longitude"], 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"]);
-          console.log(positions);
-
       }
       for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
