@@ -1,1 +1,1 @@
-select codigo, linha, latitude, longitude from StreamingLoop2
+select codigo, linha, latitude, longitude, sentido, velocidade, trajeto from StreamingLoop2

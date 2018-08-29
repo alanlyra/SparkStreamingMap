@@ -23,6 +23,7 @@
 <body style="padding:0px;">
 	<div class="site">
 		<header class="l-cabecalho">
+      <input type="text" id="titleWork" value="Cadê meu ônibus?" readonly style="border:0; color:#06928a; font-weight:bold; text-align: center; font-size: 28px; background-color:white;">
  				<div class="container">
 				  <table width=100%> <tr class="menubar"> <td width=100% style="background-color:#1abc9c"> <table> <tr>
     		</div>
@@ -37,7 +38,8 @@
         <p>
           <input type="text" id="amount" readonly style="border:0; color:#06928a; font-weight:bold; text-align: center; font-size: 16px;">
         </p>
-        <select id="linha">
+
+        <select id="linha" style="float:left; height:52px;">
           <option value="BRTUFRJ">BRTUFRJ</option>
         	<option value="5800A1">5800A1</option>
         	<option value="702A1">702A1</option>
@@ -130,6 +132,61 @@
         	<option value="SV870">SV870</option>
         	<option value="5811A1">5811A1</option>
         </select>
+        <!-- <select id="linha">
+          <option value='871A1'>871A1</option>
+          <option value='SV823A'>SV823A</option>
+          <option value='355A1'>355A1</option>
+          <option value='853V1'>853V1</option>
+          <option value='858A1'>858A1</option>
+          <option value='5800A1'>5800A1</option>
+          <option value='890A1'>890A1</option>
+          <option value='879A1'>879A1</option>
+          <option value='827A1'>827A1</option>
+          <option value='38'>38</option>
+          <option value='991A1'>991A1</option>
+          <option value='5805A1'>5805A1</option>
+          <option value='954A1'>954A1</option>
+          <option value='883A1'>883A1</option>
+          <option value='817A1'>817A1</option>
+          <option value='897A1'>897A1</option>
+          <option value='853A1'>853A1</option>
+          <option value='SR872A1'>SR872A1</option>
+          <option value='42'>42</option>
+          <option value='953A1'>953A1</option>
+          <option value='832A1'>832A1</option>
+          <option value='5700A1'>5700A1</option>
+          <option value='5850A1'>5850A1</option>
+          <option value='5704A1'>5704A1</option>
+          <option value='932A1'>932A1</option>
+          <option value='5702A1'>5702A1</option>
+          <option value='LECD23'>LECD23</option>
+          <option value='25'>25</option>
+          <option value='854B1'>854B1</option>
+          <option value='916A1'>916A1</option>
+          <option value='SR870A'>SR870A</option>
+          <option value='855A1'>855A1</option>
+          <option value='50'>50</option>
+          <option value='5704N1'>5704N1</option>
+          <option value='SV870A1'>SV870A1</option>
+          <option value='928A1'>928A1</option>
+          <option value='5800N1'>5800N1</option>
+          <option value='877A1'>877A1</option>
+          <option value='721A1'>721A1</option>
+          <option value='5804A1'>5804A1</option>
+          <option value='21A'>21A</option>
+          <option value='910A'>910A</option>
+          <option value='5811N1'>5811N1</option>
+          <option value='896N1'>896N1</option>
+          <option value='939A'>939A</option>
+          <option value='896A1'>896A1</option>
+          <option value='891N1'>891N1</option>
+          <option value='610A1'>610A1</option>
+          <option value='355N1'>355N1</option>
+          <option value='5808A1'>5808A1</option>
+        </select> -->
+        <div class="alert alert-warning" role="alert" style="float:left; width: 88.5%;text-align: center; margin:0px;">
+          Aguarde! Atualizando...
+        </div>
 				<table>
   				<tr>
   				    <td width=470 valign=top>
@@ -224,6 +281,7 @@
     $('select').on('change', function() {
         $( "#amount" ).val( "BRT - Linha " + this.value );
         renameQuery(this.value);
+        $(".alert-warning").show();
     });
 
     reload(false);
@@ -233,7 +291,7 @@
 
     for(chave in positions){
       if(positions[chave]["linha"] == $('select').val())
-        locations.push(['<b> Linha: ' + positions[chave]["linha"] + '</b><br> Veículo: ' + positions[chave]["codigo"], positions[chave]["latitude"], positions[chave]["longitude"], 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"]);
+        locations.push(['<b> Linha: ' + positions[chave]["linha"] + '</b><br><br> Veículo: ' + positions[chave]["codigo"] + '<br> Sentido: ' + positions[chave]["sentido"] + '<br> Velocidade: ' + positions[chave]["velocidade"] + '<br> Trajeto: ' + positions[chave]["trajeto"], positions[chave]["latitude"], positions[chave]["longitude"], 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"]);
     }
     map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
@@ -261,8 +319,10 @@
     if (typeof locations !== 'undefined') {
       locations = [];
       for(chave in positions){
-        if(positions[chave]["linha"] == $('select').val())
-          locations.push(['<b> Linha: ' + positions[chave]["linha"] + '</b><br> Veículo: ' + positions[chave]["codigo"], positions[chave]["latitude"], positions[chave]["longitude"], 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"]);
+        if(positions[chave]["linha"] == $('select').val()){
+          locations.push(['<b> Linha: ' + positions[chave]["linha"] + '</b><br><br> Veículo: ' + positions[chave]["codigo"] + '<br> Sentido: ' + positions[chave]["sentido"] + '<br> Velocidade: ' + positions[chave]["velocidade"] + '<br> Trajeto: ' + positions[chave]["trajeto"], positions[chave]["latitude"], positions[chave]["longitude"], 2, "https://maps.google.com/mapfiles/ms/micons/bus.png"]);
+          $(".alert-warning").hide();
+        }
       }
       for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
