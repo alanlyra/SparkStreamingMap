@@ -1,0 +1,11 @@
+v1
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/2/data/part-00000-a84f0c5a-df88-47e7-bc0a-33e9e829656f-c000.csv","timestamp":1621368744000,"batchId":0}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/2/data/part-00000-009eac8f-4702-438d-be8e-267044baa3bd-c000.csv","timestamp":1621368745000,"batchId":1}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/2/data/part-00000-fe57f2b3-2940-4b83-99e0-d54ccd59f5d9-c000.csv","timestamp":1621368750000,"batchId":2}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/2/data/part-00000-a7488498-4e6b-4c44-a612-6ba3772fee95-c000.csv","timestamp":1621368755000,"batchId":3}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/2/data/part-00000-5b97941a-27b8-424e-9d94-dbd4bc5bdf13-c000.csv","timestamp":1621368760000,"batchId":4}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/2/data/part-00000-b9770a03-fe50-4b28-9008-50b94b2b5406-c000.csv","timestamp":1621368765000,"batchId":5}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/2/data/part-00000-4b9d705c-7fcb-47ed-af2f-f76b75d2f296-c000.csv","timestamp":1621368770000,"batchId":6}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/2/data/part-00000-692d6832-715a-4acf-9b49-ea117718877a-c000.csv","timestamp":1624916047000,"batchId":7}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/2/data/part-00000-ab96dc11-9ae4-4661-9746-a81a957bd2c4-c000.csv","timestamp":1624916050000,"batchId":8}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/2/data/part-00000-d6fa13b1-16fe-4f75-a134-05392b9f3d41-c000.csv","timestamp":1624916055000,"batchId":9}

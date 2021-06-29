@@ -1,0 +1,11 @@
+v1
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/out/part-00000-05855680-f111-4fe1-b424-03042a9fec34-c000.csv","size":126,"isDir":false,"modificationTime":1621368746000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/out/part-00000-f377c7be-32fc-4869-a660-430db316bfac-c000.csv","size":128,"isDir":false,"modificationTime":1621368750000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/out/part-00000-22d1eb1b-af9a-41cd-9a2c-3e67aa2874e8-c000.csv","size":128,"isDir":false,"modificationTime":1621368755000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/out/part-00000-5d78153a-0964-4387-813b-2fd8c014197f-c000.csv","size":128,"isDir":false,"modificationTime":1621368760000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/out/part-00000-ee6d6595-2c06-4815-b1f9-48760933f2ed-c000.csv","size":128,"isDir":false,"modificationTime":1621368765000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/out/part-00000-85c5f58d-0d9f-4934-9051-b89fdf71269b-c000.csv","size":128,"isDir":false,"modificationTime":1621368770000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/out/part-00000-cf2feae2-079c-46b6-8c1c-e4e5b214497d-c000.csv","size":128,"isDir":false,"modificationTime":1621368775000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/out/part-00000-57fdb32f-9466-4df9-bf1b-62daa390cc57-c000.csv","size":127,"isDir":false,"modificationTime":1624916048000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/out/part-00000-08aa5cb7-fb96-4438-b952-c903e49b5695-c000.csv","size":128,"isDir":false,"modificationTime":1624916055000,"blockReplication":1,"blockSize":33554432,"action":"add"}
+{"path":"file:///home/alan/git/SparkStreamingMap/exec/out/part-00000-0da192a7-7d9f-438a-8d00-39bcbca47340-c000.csv","size":128,"isDir":false,"modificationTime":1624916060000,"blockReplication":1,"blockSize":33554432,"action":"add"}
